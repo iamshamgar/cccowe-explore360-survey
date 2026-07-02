@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CCCOWE 2026 Explore360 — Live Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="banner">
+  <p class="banner__eyebrow">CCCOWE 2026 &middot; Explore360 Breakout</p>
+  <h1 class="banner__title">The Evolving Chinese Church <span class="accent">Around the Globe</span></h1>
+  <p class="banner__meta">Live delegate snapshot &nbsp;&bull;&nbsp; <a href="index.html">&larr; Take the survey</a></p>
+</header>
+
+<main class="wrap wrap--wide">
+
+  <div class="toolbar">
+    <div class="toolbar__left">
+      <h2 class="toolbar__title">Room Snapshot</h2>
+      <span class="demo-flag">Prototype</span>
+    </div>
+    <div class="toolbar__right" style="display:flex;align-items:center;gap:14px;">
+      <span class="updated" id="updated">&nbsp;</span>
+      <div class="toolbar__actions">
+        <button class="tbtn" id="refresh">Refresh</button>
+        <button class="tbtn" id="fullscreen">Full screen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- empty state -->
+  <div class="empty hidden" id="empty">
+    <h2>No responses yet</h2>
+    <p>Be the first — <a href="index.html">take the survey</a> and watch the room appear.</p>
+  </div>
+
+  <!-- dashboard body -->
+  <div id="board">
+    <!-- KPI row -->
+    <section class="kpis">
+      <div class="kpi"><div class="kpi__num" id="kpi-total">0</div><div class="kpi__label">Total responses</div></div>
+      <div class="kpi"><div class="kpi__num" id="kpi-countries">0</div><div class="kpi__label">Countries represented</div></div>
+      <div class="kpi"><div class="kpi__num" id="kpi-hope">0<small>/5</small></div><div class="kpi__label">Average hope score</div></div>
+    </section>
+
+    <!-- charts -->
+    <section class="grid">
+
+      <!-- FEATURE: Q8 tensions -->
+      <div class="card card--feature col-7">
+        <p class="card__title">Most pressing tensions right now</p>
+        <p class="card__q">Q8 &middot; select up to 3</p>
+        <div class="card__canvas-wrap"><canvas id="c-q8"></canvas></div>
+      </div>
+
+      <!-- Q9 hope distribution -->
+      <div class="card col-5">
+        <p class="card__title">How hopeful is the room?</p>
+        <p class="card__q" id="q9-sub">Q9 &middot; scale 1–5</p>
+        <div class="card__canvas-wrap"><canvas id="c-q9"></canvas></div>
+      </div>
+
+      <!-- Q1 countries -->
+      <div class="card col-6">
+        <p class="card__title">Countries represented</p>
+        <p class="card__q">Q1</p>
+        <div class="card__canvas-wrap"><canvas id="c-q1"></canvas></div>
+      </div>
+
+      <!-- Q7 youth outcomes -->
+      <div class="card col-6">
+        <p class="card__title">Where the next generation goes</p>
+        <p class="card__q">Q7</p>
+        <div class="card__canvas-wrap"><canvas id="c-q7"></canvas></div>
+      </div>
+
+      <!-- Q5 communities -->
+      <div class="card col-6">
+        <p class="card__title">Communities in the congregation</p>
+        <p class="card__q">Q5 &middot; select all</p>
+        <div class="card__canvas-wrap"><canvas id="c-q5"></canvas></div>
+      </div>
+
+      <!-- Q10 sources of hope -->
+      <div class="card col-6">
+        <p class="card__title">What gives the room hope</p>
+        <p class="card__q">Q10 &middot; select all</p>
+        <div class="card__canvas-wrap"><canvas id="c-q10"></canvas></div>
+      </div>
+
+      <!-- Q3 roles -->
+      <div class="card col-4">
+        <p class="card__title">Roles in the room</p>
+        <p class="card__q">Q3</p>
+        <div class="card__canvas-wrap"><canvas id="c-q3"></canvas></div>
+      </div>
+
+      <!-- Q4 languages -->
+      <div class="card col-4">
+        <p class="card__title">Languages per church</p>
+        <p class="card__q">Q4</p>
+        <div class="card__canvas-wrap"><canvas id="c-q4"></canvas></div>
+      </div>
+
+      <!-- Q6 relative size -->
+      <div class="card col-4">
+        <p class="card__title">Local-language vs Chinese congregation size</p>
+        <p class="card__q">Q6</p>
+        <div class="card__canvas-wrap"><canvas id="c-q6"></canvas></div>
+      </div>
+
+    </section>
+  </div>
+
+  <p class="pagelink"><a href="index.html">&larr; Back to the survey</a></p>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="js/questions.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
