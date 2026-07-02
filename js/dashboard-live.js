@@ -12,7 +12,7 @@
    You can also test without editing this file by appending ?sheet=<URL> to the page URL.
    ============================================================================ */
 
-const SHEET_URL = "";          // <-- PASTE PUBLISHED SHEET URL HERE
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/1CmJpS6kpBaVqfuYAPZfl9K0Mf-jKuP52JGNDhoC4i8g/gviz/tq?tqx=out:json&sheet=Form%20Responses%201";  // live CCCOWE Explore360 response Sheet (gviz feed)
 const POLL_SECONDS = 20;       // auto-refresh interval while the board is open
 
 /* ============================================================================ */
