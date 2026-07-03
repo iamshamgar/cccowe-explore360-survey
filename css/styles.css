@@ -506,68 +506,81 @@ a.tbtn { text-decoration: none; display: inline-block; }
   margin: 0 0 14px;
 }
 
+/* download / link row — TITLE-FIRST hierarchy:
+   small supporting tag/icon · prominent title + muted description · download button */
 .ritem {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px 20px;
+  padding: 15px 18px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--card);
   box-shadow: var(--shadow);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-decoration: none;
   color: inherit;
-  transition: border-color .15s, transform .12s, box-shadow .15s;
+  transition: border-color .15s, box-shadow .15s;
 }
-a.ritem:hover {
-  border-color: var(--teal);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
-}
-.ritem__icon {
+a.ritem:hover { border-color: var(--teal); box-shadow: var(--shadow-lg); }
+a.ritem:hover .ritem__title { color: var(--teal-deep); }
+a.ritem:hover .ritem__action { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* small leading accent (quiet, supporting) */
+.ritem__lead {
   flex: none;
-  width: 46px; height: 46px;
-  border-radius: 11px;
-  display: flex; align-items: center; justify-content: center;
-  background: #eef7f6;
-  color: var(--teal);
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.ritem__icon svg { width: 24px; height: 24px; }
-.ritem__icon--pdf { background: #fbeef0; color: var(--rose); }
-.ritem__icon--report { background: #f4eefb; color: var(--c4); }
+.ritem__ic { width: 24px; height: 24px; color: var(--teal); }
+.filetag {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 5px 7px;
+  border-radius: 6px;
+  color: var(--rose);
+  background: rgba(177,73,92,.08);
+  border: 1px solid rgba(177,73,92,.28);
+}
+.filetag--report { color: var(--c4); background: rgba(122,94,168,.08); border-color: rgba(122,94,168,.30); }
+
+/* body — the title is the focal point */
 .ritem__body { flex: 1; min-width: 0; }
-.ritem__title { font-weight: 600; color: var(--ink); font-size: 1.02rem; }
-.ritem__desc { font-size: .86rem; color: var(--muted); margin-top: 2px; }
+.ritem__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.25;
+  transition: color .15s;
+}
+.ritem__desc { font-size: .85rem; color: var(--muted); margin-top: 3px; }
+
+/* clear download affordance on the right */
 .ritem__action {
   flex: none;
-  font-size: .85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .82rem;
   font-weight: 600;
   color: var(--teal);
   white-space: nowrap;
-  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--teal);
+  border-radius: 9px;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.ritem__action svg { width: 16px; height: 16px; }
+.ritem__action svg { width: 15px; height: 15px; }
 
-.ritem.is-coming {
-  cursor: default;
-  border-style: dashed;
-  box-shadow: none;
-  background: #fbfcfb;
-}
-.ritem.is-coming:hover { border-color: var(--line); transform: none; }
-.ritem.is-coming .ritem__icon { background: #eef0ee; color: var(--muted); }
-.badge-soon {
-  flex: none;
-  font-size: .7rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  background: #fff;
-  padding: 4px 10px;
-  border-radius: 20px;
+@media (max-width: 560px) {
+  .ritem { flex-wrap: wrap; gap: 10px 14px; }
+  .ritem__title { font-size: 1.08rem; }
+  .ritem__action { margin-left: 58px; }
 }
 
 .res-credit {
