@@ -326,6 +326,9 @@ body {
   padding: 8px 14px; border-radius: 9px; cursor: pointer; transition: all .15s;
 }
 .tbtn:hover { border-color: var(--teal); color: var(--teal); }
+a.tbtn { text-decoration: none; display: inline-block; }
+.tbtn--accent { background: var(--teal); color: #fff; border-color: var(--teal); }
+.tbtn--accent:hover { background: var(--teal-deep); border-color: var(--teal-deep); color: #fff; }
 
 /* KPI row */
 .kpis {

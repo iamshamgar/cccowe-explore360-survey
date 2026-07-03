@@ -3,13 +3,14 @@
 An interactive web prototype for the **Explore360 breakout** — *"The Evolving Chinese
 Church Around the Globe"* (CCCOWE 2026, Kuching, Malaysia, July 21–22, 2026).
 
-Three static pages:
+Four static pages:
 
 | Page | Purpose |
 |------|---------|
 | `index.html` | The 10-question in-session delegate survey. Submissions save to the browser's `localStorage`. |
 | `dashboard.html` | **Demo dashboard** — preloaded with ~40 realistic sample responses (plus any local submissions) so it looks real for a team demo. |
-| `dashboard-live.html` | **Live / production dashboard** — identical design and charts, **no sample data**. Reads real responses from a published Google Sheet (Koda's Google Form → Sheet backend). Until the first row arrives it shows a polished "Awaiting responses" skeleton state. |
+| `dashboard-live.html` | **Live analytical dashboard** — full 10-chart grid, **no sample data**. Reads real responses from the published Google Sheet. Until the first row arrives it shows a polished "Awaiting responses" skeleton state. Best for close-up / laptop viewing. |
+| `stage.html` | **Projector / big-screen view — open this one in the room.** Dark "stage" theme, giant KPI numbers, and one large hero chart that **auto-rotates** through the key visuals (Q8 tensions first). Reads the same live Sheet. Designed to read from 50+ ft. |
 
 > **This is a prototype.** It demonstrates the concept end-to-end (fill the survey → see it on
 > the dashboard) with **no server or backend**. Responses are stored in the browser only. See
@@ -48,7 +49,8 @@ Then open:
 
 - Survey: <http://localhost:8360/index.html>
 - Demo dashboard: <http://localhost:8360/dashboard.html>
-- Live dashboard: <http://localhost:8360/dashboard-live.html> (shows the "Awaiting responses" state until a Sheet is connected)
+- Live analytical dashboard: <http://localhost:8360/dashboard-live.html>
+- **Projector view: <http://localhost:8360/stage.html>** (press **F** for full screen)
 
 **Demo flow:** open the survey → fill it in (Q8 caps at 3) → **Submit** → open the dashboard →
 your response is now counted. To reset the demo, clear the site's `localStorage`
@@ -76,6 +78,33 @@ folders beginning with an underscore.)
 
 ---
 
+## The projector view (`stage.html`) — for the room
+
+This is the screen to put on the projector during the session. It is built for legibility from
+**50+ feet**, not for analysis:
+
+- **Dark "stage" theme** — deep navy background with bright teal / gold / rose bars for maximum
+  projector contrast in a dimmed room.
+- **A persistent header** with the session title and a **giant KPI band** (Responses, Countries,
+  Average hope) that is always on screen.
+- **One big hero chart at a time**, full-bleed, with a large title so the room always knows what
+  it's looking at. It **auto-rotates every ~13 seconds** through the key visuals in this order:
+  **Q8 most-pressing tensions (lead)** → Q9 hope distribution → Q1 countries → Q5 communities →
+  Q7 next-generation outcomes → Q10 sources of hope. Progress dots + a fill bar show the cadence.
+- **Live** — polls the same Sheet every 20s; new responses update the KPIs and the current chart
+  in place. Before any responses arrive it shows a calm "Awaiting responses" state (no broken UI).
+- Type scales with the viewport, so it fills **1920×1080** and looks even bigger on 4K projectors.
+
+**Running it in the room:**
+1. Open `stage.html`, press **F** (or the browser's full-screen) for a clean kiosk with no chrome.
+2. It rotates on its own. Optional manual control: **← / →** step between panels; **F** toggles
+   full screen.
+3. URL flags for setup/testing: `?panel=0` start on a specific panel · `?noanim=1` freeze for a
+   photo · `?sheet=<url>` point at any Sheet/CSV.
+
+The analytical `dashboard-live.html` (10-chart grid) is preserved for close-up viewing; each page
+links to the projector view.
+
 ## The live dashboard (`dashboard-live.html`)
 
 This is the real-event board. It carries **no sample data** — it reads directly from Koda's
@@ -85,7 +114,8 @@ published Google Sheet (fed by a Google Form). Two states:
   as animated skeletons under an "Awaiting responses" banner. Nothing looks broken.
 - **Live** — as rows arrive it auto-populates (polls every `POLL_SECONDS`, default 20s).
 
-**One-line connection when Koda's Sheet is ready** — edit the top of `js/dashboard-live.js`:
+**One-line connection when Koda's Sheet is ready** — edit the top of `js/sheet-data.js` (this one
+file feeds **both** the analytical board and the projector view):
 
 ```js
 const SHEET_URL = "";   // <-- paste the published Sheet URL here
@@ -177,13 +207,17 @@ Option **keys** (not display labels) are the source of truth and are defined onc
 survey-app/
 ├── index.html                 # survey form (10 questions)
 ├── dashboard.html             # DEMO dashboard (preloaded sample data)
-├── dashboard-live.html        # LIVE dashboard (Google Sheet, no sample data)
-├── css/styles.css             # shared design tokens + styles
+├── dashboard-live.html        # LIVE analytical dashboard (10-chart grid, Sheet)
+├── stage.html                 # PROJECTOR view (dark, giant, auto-rotating)
+├── css/styles.css             # shared design tokens + light-theme styles
+├── css/stage.css              # dark projector/stage theme
 ├── js/questions.js            # shared question config (keys ↔ labels) — source of truth
+├── js/sheet-data.js           # SHEET_URL + Sheet fetch/parse pipeline (live board + stage)
 ├── js/survey.js               # form rendering, Q8 max-3, localStorage save
-├── js/charts.js               # shared chart engine (used by BOTH dashboards)
+├── js/charts.js               # shared chart engine (demo + analytical dashboards)
 ├── js/dashboard.js            # demo loader: sample JSON + localStorage merge
-├── js/dashboard-live.js       # live loader: SHEET_URL config + Sheet fetch/parse
+├── js/dashboard-live.js       # analytical live loader (uses sheet-data.js)
+├── js/stage.js                # projector engine: KPIs + auto-rotating hero chart
 ├── data/sample-responses.json # ~40 realistic sample responses (demo board only)
 ├── data/_generate_sample.py   # (dev only) regenerates the sample JSON
 ├── fixtures/live-test.csv      # Sheet column contract / parser test fixture (not live data)
