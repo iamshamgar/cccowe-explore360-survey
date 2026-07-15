@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>CCCOWE 2026 Explore360 — Presentation</title>
+<meta name="description" content="The Evolving Chinese Church Around the Globe — speaker deck for Pastor Enoch Liao." />
+<!-- Google Fonts with system fallback via font-display: swap. Deck stays fully usable on-brand if fonts fail. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CCCOWE 2026 Explore360 — Speaker Deck
+   Matched to the printed handout family (Handouts/handout.css):
+   petrol-teal accent, serif display, clean sans body.
+   Self-contained. No runtime CDN dependency. Offline-resilient.
+   ============================================================ */
+:root{
+  --ink:#1C1E21; --ink-soft:#3A3F45; --muted:#5C6268;
+  --accent:#1F5F73; --accent-dk:#164657;
+  --rule:#E4E7E9; --wash:#F3F6F7; --paper:#FFFFFF;
+  --serif:"PT Serif","Iowan Old Style","Georgia","Times New Roman",serif;
+  --sans:"Lato","Avenir Next","Helvetica Neue","Segoe UI",Arial,sans-serif;
+  /* Fluid unit: 1 slide is designed on a 1280x720 canvas. vmin-ish scaling keeps
+     type readable from the back of the room and graceful on small screens. */
+  --u: min(1.34vw, 2.38vh);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:#0d1114; /* letterbox behind the paper stage */
+  color:var(--ink);
+  font-family:var(--sans);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---- Stage: fixed 16:9 paper surface, centered, letterboxed ---- */
+#stage{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+}
+#deck{
+  position:relative;
+  width:min(100vw, 177.78vh);   /* 16:9 */
+  height:min(56.25vw, 100vh);
+  background:var(--paper);
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.45);
+}
+
+/* ---- Slide primitives ---- */
+.slide{
+  position:absolute; inset:0;
+  padding: calc(var(--u)*3.4) calc(var(--u)*4.2) calc(var(--u)*3.2);
+  display:flex; flex-direction:column;
+  opacity:0; visibility:hidden;
+  transform:translate3d(0,0,0);
+  transition:opacity .42s ease, transform .42s ease;
+  will-change:opacity, transform;
+  background:var(--paper);
+}
+.slide.is-active{opacity:1; visibility:visible; z-index:2;}
+.slide.is-prev{opacity:0; visibility:hidden; transform:translateX(-2.5%);}
+.slide.is-next{opacity:0; visibility:hidden; transform:translateX(2.5%);}
+.slide.wash{background:var(--wash);}
+
+/* left spine bar used on title + discussion slides */
+.spine{position:absolute; left:0; top:0; bottom:0; width:calc(var(--u)*.9); background:var(--accent);}
+
+/* eyebrow pill — matches handout .eyebrow */
+.eyebrow{
+  align-self:flex-start;
+  display:inline-block;
+  font-family:var(--sans); font-weight:700;
+  font-size:calc(var(--u)*1.35);
+  letter-spacing:.16em; text-transform:uppercase;
+  color:#fff; background:var(--accent-dk);
+  padding:.5em .9em .45em; border-radius:.25em;
+  line-height:1;
+}
+
+/* title block — serif headline with petrol accent bar */
+.titleblock{display:flex; gap:calc(var(--u)*1.4); margin-top:calc(var(--u)*1.6);}
+.titleblock .bar{flex:0 0 auto; width:calc(var(--u)*.72); background:var(--accent); border-radius:1px;}
+.title{
+  font-family:var(--serif); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*5.0); line-height:1.03; letter-spacing:-.005em;
+}
+.title.deck{font-size:calc(var(--u)*6.0);}
+.slide.wash .title{color:var(--ink);}
+
+/* content region grows to fill */
+.body{flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; min-height:0;}
+.body.top{justify-content:flex-start; padding-top:calc(var(--u)*2.2);}
+
+/* big key-phrase bullets */
+ul.bullets{list-style:none;}
+ul.bullets li{
+  position:relative; padding-left:calc(var(--u)*3.0);
+  font-family:var(--sans); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*3.7); line-height:1.08;
+  margin-bottom:calc(var(--u)*1.9);
+}
+ul.bullets li:last-child{margin-bottom:0;}
+ul.bullets li::before{
+  content:""; position:absolute; left:0; top:.42em;
+  width:calc(var(--u)*1.25); height:calc(var(--u)*1.25);
+  background:var(--accent); border-radius:50%;
+}
+
+/* pull quote */
+.quote-wrap{display:flex; gap:calc(var(--u)*1.6); align-items:stretch;}
+.quote-wrap .qbar{flex:0 0 auto; width:calc(var(--u)*1.1); background:var(--accent); border-radius:1px;}
+.quote{
+  font-family:var(--serif); font-style:italic; font-weight:700;
+  color:var(--accent-dk); font-size:calc(var(--u)*3.9); line-height:1.12;
+}
+.attrib{
+  font-family:var(--sans); font-weight:400; color:var(--muted);
+  font-size:calc(var(--u)*2.0); margin-top:calc(var(--u)*1.6);
+}
+
+/* three-column card row (framing / clocks) */
+.cols{display:grid; grid-template-columns:repeat(3,1fr); gap:calc(var(--u)*1.6); flex:1 1 auto; align-content:center;}
+.card{
+  position:relative; background:var(--wash);
+  padding:calc(var(--u)*2.0) calc(var(--u)*1.7);
+  display:flex; flex-direction:column;
+  border-radius:2px; overflow:hidden;
+}
+.card .captop{position:absolute; left:0; right:0; top:0; height:calc(var(--u)*.62); background:var(--accent);}
+.card.leftbar .captop{right:auto; bottom:0; height:auto; width:calc(var(--u)*.55);}
+.card .cname{font-family:var(--sans); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*2.0); letter-spacing:.03em; margin-top:calc(var(--u)*.8);}
+.card .cplace{font-family:var(--sans); color:var(--muted); font-size:calc(var(--u)*1.55); margin-top:calc(var(--u)*.35);}
+.card .cbig{font-family:var(--serif); font-weight:700; color:var(--ink); font-size:calc(var(--u)*3.0); line-height:1.05; margin-top:calc(var(--u)*1.5);}
+.card .ctag{font-family:var(--sans); font-weight:700; color:var(--muted); letter-spacing:.14em; font-size:calc(var(--u)*1.65); text-transform:uppercase;}
+.card .cclock{font-family:var(--serif); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*3.0); line-height:1.02; margin-top:calc(var(--u)*.7);}
+.card .cnote{font-family:var(--sans); color:var(--ink-soft); font-size:calc(var(--u)*2.0); margin-top:calc(var(--u)*1.4); line-height:1.15;}
+
+/* discussion slide */
+.disc-head{display:flex; align-items:center; justify-content:space-between; gap:1em;}
+.chip{
+  font-family:var(--sans); font-weight:700; color:var(--accent-dk);
+  letter-spacing:.08em; font-size:calc(var(--u)*1.9);
+  border:2px solid var(--accent); border-radius:2em;
+  padding:.35em 1.1em; text-transform:uppercase; white-space:nowrap;
+}
+.disc-card{
+  position:relative; background:var(--paper);
+  border-radius:2px; margin-top:calc(var(--u)*2.0);
+  padding:calc(var(--u)*2.6) calc(var(--u)*3.0) calc(var(--u)*2.6) calc(var(--u)*3.4);
+  box-shadow:0 2px 22px rgba(28,30,33,.06);
+}
+.disc-card .cbar{position:absolute; left:0; top:0; bottom:0; width:calc(var(--u)*.72); background:var(--accent); border-radius:1px 0 0 1px;}
+.disc-intro{font-family:var(--sans); font-style:italic; color:var(--muted); font-size:calc(var(--u)*2.3); margin-bottom:calc(var(--u)*1.6);}
+ol.prompts{list-style:none; counter-reset:q;}
+ol.prompts li{
+  counter-increment:q; position:relative; padding-left:calc(var(--u)*3.4);
+  font-family:var(--serif); color:var(--ink); font-size:calc(var(--u)*3.5); line-height:1.12;
+  margin-bottom:calc(var(--u)*1.5);
+}
+ol.prompts li:last-child{margin-bottom:0;}
+ol.prompts li::before{
+  content:counter(q) "."; position:absolute; left:0; top:0;
+  font-family:var(--sans); font-weight:700; color:var(--accent);
+  font-size:calc(var(--u)*3.5);
+}
+
+/* QR + big statement layout (survey / live) */
+.split{display:flex; gap:calc(var(--u)*3.0); flex:1 1 auto; align-items:center;}
+.split .lead{flex:1 1 auto;}
+.split .lead .l1{font-family:var(--serif); font-weight:700; color:var(--ink); font-size:calc(var(--u)*3.9); line-height:1.12;}
+.split .lead .l2{font-family:var(--serif); font-weight:400; color:var(--accent-dk); font-size:calc(var(--u)*3.2); line-height:1.14; margin-top:calc(var(--u)*1.4);}
+.qr{
+  flex:0 0 auto; text-align:center;
+  padding:calc(var(--u)*1.0); background:#fff; border:2px solid var(--accent); border-radius:4px;
+}
+.qr img{display:block; width:calc(var(--u)*24); max-width:34vh; height:auto; image-rendering:pixelated;}
+.qr .cap{font-family:var(--sans); font-weight:700; color:var(--ink-soft); font-size:calc(var(--u)*1.7); margin-top:calc(var(--u)*.9);}
+.fallback{font-family:var(--sans); font-size:calc(var(--u)*1.35); color:var(--muted); margin-top:calc(var(--u)*1.4);}
+.fallback b{color:var(--ink-soft);}
+.fallback a{color:var(--accent); text-decoration:none; word-break:break-all;}
+
+/* live-embed slide */
+.embed-frame{
+  position:relative; flex:1 1 auto; margin-top:calc(var(--u)*1.4);
+  border:2px solid var(--rule); border-radius:4px; overflow:hidden; background:var(--wash);
+  min-height:0;
+}
+.embed-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; background:#0d1114;}
+.embed-ph{
+  position:absolute; inset:0; display:flex; flex-direction:column; gap:.8em;
+  align-items:center; justify-content:center; text-align:center;
+  font-family:var(--sans); color:var(--muted); font-size:calc(var(--u)*2.0); padding:2em;
+}
+.embed-ph .ring{width:calc(var(--u)*3.4); height:calc(var(--u)*3.4); border:3px solid var(--rule); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.embed-open{
+  align-self:flex-start; margin-top:calc(var(--u)*1.1);
+  font-family:var(--sans); font-weight:700; font-size:calc(var(--u)*1.7); color:var(--accent);
+  text-decoration:none;
+}
+.embed-open:hover{text-decoration:underline;}
+
+/* resources 3-up QR */
+.res-lead{font-family:var(--serif); font-style:italic; color:var(--ink-soft); font-size:calc(var(--u)*2.3); margin-top:calc(var(--u)*1.4);}
+.res-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:calc(var(--u)*2.6); flex:1 1 auto; align-content:center; justify-items:center;}
+.res-item{text-align:center; display:flex; flex-direction:column; align-items:center;}
+.res-item .qr img{width:calc(var(--u)*17); max-width:24vh;}
+.res-item .rlabel{font-family:var(--serif); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*2.5); margin-top:calc(var(--u)*1.2);}
+.res-item a.reslink{font-family:var(--sans); font-size:calc(var(--u)*1.5); color:var(--accent); text-decoration:none; margin-top:calc(var(--u)*.5);}
+.res-item a.reslink:hover{text-decoration:underline;}
+
+/* fragments — "reveal next point" build */
+.frag{opacity:0; transform:translateY(6px); transition:opacity .34s ease, transform .34s ease;}
+.frag.shown{opacity:1; transform:none;}
+
+/* ---- Footer rule (per-slide, matches handout footer) ---- */
+.foot{
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid var(--rule);
+  padding-top:calc(var(--u)*.7); margin-top:calc(var(--u)*1.6);
+  font-family:var(--sans); font-size:calc(var(--u)*1.15);
+  letter-spacing:.05em; color:var(--muted);
+}
+.foot .tie{text-transform:uppercase; letter-spacing:.08em;}
+.foot .copy{white-space:nowrap;}
+.foot .tag{text-transform:uppercase; letter-spacing:.1em; font-weight:700; color:var(--accent-dk);}
+
+/* title slide has no footer rule; give it its own credit line */
+.slide.title-slide .foot{border:none;}
+.subtitle-serif{font-family:var(--serif); font-style:italic; color:var(--ink-soft); font-size:calc(var(--u)*2.6); line-height:1.2;}
+.rule-mark{width:calc(var(--u)*18); height:3px; background:var(--accent); margin:calc(var(--u)*1.8) 0;}
+.by-name{font-family:var(--sans); font-weight:700; color:var(--ink); font-size:calc(var(--u)*2.4); margin-top:calc(var(--u)*.6);}
+.by-meta{font-family:var(--sans); color:var(--muted); font-size:calc(var(--u)*1.7); letter-spacing:.02em; margin-top:calc(var(--u)*.35);}
+
+/* ---- Chrome: counter, progress, hint ---- */
+#hud{position:fixed; z-index:20; pointer-events:none;}
+#counter{
+  position:fixed; right:calc(var(--u)*2.0); bottom:calc(var(--u)*1.4); z-index:20;
+  font-family:var(--sans); font-weight:700; font-size:calc(var(--u)*1.6);
+  color:rgba(255,255,255,.75); background:rgba(13,17,20,.55);
+  padding:.3em .8em; border-radius:1em; letter-spacing:.06em;
+  pointer-events:none;
+}
+#progress{position:fixed; left:0; top:0; height:3px; background:var(--accent); width:0; z-index:20; transition:width .3s ease;}
+#hint{
+  position:fixed; left:50%; bottom:calc(var(--u)*1.4); transform:translateX(-50%); z-index:20;
+  font-family:var(--sans); font-size:calc(var(--u)*1.35); color:rgba(255,255,255,.7);
+  background:rgba(13,17,20,.55); padding:.4em 1em; border-radius:1em;
+  transition:opacity .5s ease; pointer-events:none;
+}
+#hint.gone{opacity:0;}
+
+/* nav arrows — subtle, appear on hover, for touch/click users */
+.nav-arrow{
+  position:fixed; top:50%; transform:translateY(-50%); z-index:20;
+  width:calc(var(--u)*5); height:calc(var(--u)*5); border-radius:50%;
+  background:rgba(13,17,20,.35); color:#fff; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:calc(var(--u)*2.6); opacity:0; transition:opacity .3s ease;
+}
+#stage:hover .nav-arrow{opacity:.55;}
+.nav-arrow:hover{opacity:1 !important;}
+#prev{left:calc(var(--u)*1.2);}
+#next{right:calc(var(--u)*1.2);}
+
+/* ---- Responsive: on narrow/portrait screens, stack the split & cols ---- */
+@media (max-aspect-ratio:1/1){
+  :root{--u: min(3.0vw, 1.7vh);}
+  .split{flex-direction:column; align-items:flex-start;}
+  .cols, .res-grid{grid-template-columns:1fr;}
+  .qr img{width:40vw;}
+}
+
+/* ---- Print fallback (nice-to-have): each slide on its own page ---- */
+@media print{
+  body{background:#fff; overflow:visible;}
+  #stage,#deck{position:static; width:auto; height:auto; box-shadow:none;}
+  #counter,#progress,#hint,.nav-arrow{display:none;}
+  .slide{position:static; opacity:1 !important; visibility:visible !important; transform:none !important;
+    page-break-after:always; height:100vh; border-bottom:1px solid #ccc;}
+  .frag{opacity:1 !important; transform:none !important;}
+  .embed-frame iframe{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div id="stage">
+  <button class="nav-arrow" id="prev" aria-label="Previous slide">&#8249;</button>
+  <div id="deck">
+
+    <!-- ============ 1 · TITLE ============ -->
+    <section class="slide title-slide" data-tag="">
+      <span class="spine"></span>
+      <span class="eyebrow">Explore360 · Breakout Session</span>
+      <div class="body top" style="justify-content:center;">
+        <h1 class="title deck">The Evolving Chinese<br>Church Around the Globe</h1>
+        <div class="rule-mark"></div>
+        <p class="subtitle-serif">Three windows on one global reality</p>
+        <p class="by-name">Pastor Enoch Liao</p>
+        <p class="by-meta">CCCOWE 2026 Explore360 · Kuching, Malaysia · July 21–22</p>
+      </div>
+      <div class="foot"><span class="copy">© 2026 Enoch Y. Liao</span></div>
+    </section>
+
+    <!-- ============ 2 · SURVEY ============ -->
+    <section class="slide" data-tag="Survey">
+      <span class="eyebrow">Before We Start</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Scan to take the survey</h2></div>
+      <div class="body">
+        <div class="split">
+          <div class="lead">
+            <p class="l1">Share your church's context.</p>
+            <p class="l2">Results appear live.</p>
+            <p class="fallback"><b>Can't scan?</b> <a href="https://docs.google.com/forms/d/e/1FAIpQLSeO30R3q6S9R8Nxs0z1bX4fS4vHYBUoWzQFIrBOqaI2lgbeiA/viewform" target="_blank" rel="noopener">docs.google.com/forms/…/viewform</a></p>
+          </div>
+          <div class="qr">
+            <img src="assets/survey-qr.png" alt="QR code to take the survey" />
+            <p class="cap">Point your phone camera here</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Survey</span></div>
+    </section>
+
+    <!-- ============ 3 · FRAMING ============ -->
+    <section class="slide" data-tag="Framing">
+      <span class="eyebrow">The Frame</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Three pastors. Three windows.</h2></div>
+      <div class="body">
+        <div class="cols">
+          <div class="card"><span class="captop"></span>
+            <p class="cname">BERT HAN</p><p class="cplace">Birmingham, UK</p>
+            <p class="cbig">Suddenly<br>flooded</p></div>
+          <div class="card"><span class="captop"></span>
+            <p class="cname">BILLY LO</p><p class="cplace">Stockholm · Nordic</p>
+            <p class="cbig">Four nations,<br>one church</p></div>
+          <div class="card"><span class="captop"></span>
+            <p class="cname">ENOCH LIAO</p><p class="cplace">Boston, USA</p>
+            <p class="cbig">Four waves,<br>one roof</p></div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Framing</span></div>
+    </section>
+
+    <!-- ============ 4 · THROUGHLINES ============ -->
+    <section class="slide" data-tag="Throughlines">
+      <span class="eyebrow">What All Three Share</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Four throughlines</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Waves rewrite the pews</li>
+          <li class="frag">The language question</li>
+          <li class="frag">Formation, not preservation</li>
+          <li class="frag">Heritage, not erasure</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Throughlines</span></div>
+    </section>
+
+    <!-- ============ 5 · OPENING DISCUSSION ============ -->
+    <section class="slide wash" data-tag="Discuss">
+      <span class="spine"></span>
+      <div class="disc-head">
+        <span class="eyebrow">At Your Tables</span>
+        <span class="chip">10 min</span>
+      </div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">At Your Tables — Before We Begin</h2></div>
+      <div class="body">
+        <div class="disc-card"><span class="cbar"></span>
+          <p class="disc-intro">Take 10 minutes. Around your table:</p>
+          <ol class="prompts">
+            <li>Who is your congregation — and what is reshaping it?</li>
+            <li>What question are you bringing today?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Discuss</span></div>
+    </section>
+
+    <!-- ============ 6 · UK POINTS ============ -->
+    <section class="slide" data-tag="UK">
+      <span class="eyebrow">UK · Bert Han · Birmingham</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">A flood — not a revival</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">~200,000 Hong Kongers</li>
+          <li class="frag">One service → five</li>
+          <li class="frag">A merger, not revival</li>
+          <li class="frag">Underneath: grief</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">UK</span></div>
+    </section>
+
+    <!-- ============ 7 · UK QUOTE ============ -->
+    <section class="slide" data-tag="UK">
+      <span class="eyebrow">UK · Bert Han · Birmingham</span>
+      <div class="body">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="quote">“Hong Kong culture is dying — my daughter won't be one at all.”</p>
+            <p class="attrib">— a BCEC newcomer</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">UK</span></div>
+    </section>
+
+    <!-- ============ 8 · NORDIC POINTS ============ -->
+    <section class="slide" data-tag="Nordic">
+      <span class="eyebrow">Nordic · Billy Lo · Stockholm</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Universal language, one church</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Language kept shifting</li>
+          <li class="frag">English, for inclusion</li>
+          <li class="frag">Universal, not cultural</li>
+          <li class="frag">One church, four nations</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
+    </section>
+
+    <!-- ============ 9 · NORDIC QUOTE ============ -->
+    <section class="slide" data-tag="Nordic">
+      <span class="eyebrow">Nordic · Billy Lo · Stockholm</span>
+      <div class="body">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="quote">“They won't say 'English.' They'll say 'international.'”</p>
+            <p class="attrib">— Billy Lo</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
+    </section>
+
+    <!-- ============ 10 · USA POINTS ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">A century, and two exits</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Four waves, one roof</li>
+          <li class="frag">Complex, but fragile</li>
+          <li class="frag">Two exits: MEMA/MARK + multiethnic</li>
+          <li class="frag">Priced out, scattered</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 11 · USA QUOTE ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="body">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="quote">“My parents were born in China, and raised in Taiwan.”</p>
+            <p class="attrib">— Pastor Enoch Liao</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 12 · DIVERGENCE / CLOCKS ============ -->
+    <section class="slide" data-tag="Divergence">
+      <span class="eyebrow">Where They Diverge</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Three different clocks</h2></div>
+      <div class="body">
+        <div class="cols">
+          <div class="card leftbar"><span class="captop"></span>
+            <p class="ctag">UK</p><p class="cclock">First<br>generation</p><p class="cnote">BNO arrivals</p></div>
+          <div class="card leftbar"><span class="captop"></span>
+            <p class="ctag">NORDIC</p><p class="cclock">~ Two<br>generations</p><p class="cnote">Founders retired</p></div>
+          <div class="card leftbar"><span class="captop"></span>
+            <p class="ctag">USA</p><p class="cclock">4th–5th<br>generation</p><p class="cnote">No tie to China</p></div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Divergence</span></div>
+    </section>
+
+    <!-- ============ 13 · FORMATION POINTS ============ -->
+    <section class="slide" data-tag="Formation">
+      <span class="eyebrow">The Question Underneath</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">What a healthy church forms</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Whole disciples</li>
+          <li class="frag">Identity is discipleship</li>
+          <li class="frag">Whole, not hybrid</li>
+          <li class="frag">Sending is still healthy</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Formation</span></div>
+    </section>
+
+    <!-- ============ 14 · FORMATION QUOTE ============ -->
+    <section class="slide" data-tag="Formation">
+      <span class="eyebrow">The Question Underneath</span>
+      <div class="body">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="quote">“Bring it all — by grace — into your identity in Christ.”</p>
+            <p class="attrib">— Pastor Enoch Liao</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Formation</span></div>
+    </section>
+
+    <!-- ============ 15 · CLOSING DISCUSSION ============ -->
+    <section class="slide wash" data-tag="Discuss">
+      <span class="spine"></span>
+      <div class="disc-head">
+        <span class="eyebrow">At Your Tables</span>
+        <span class="chip">16 min</span>
+      </div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">At Your Tables — Taking It Home</h2></div>
+      <div class="body">
+        <div class="disc-card"><span class="cbar"></span>
+          <p class="disc-intro">Take 16 minutes together:</p>
+          <ol class="prompts">
+            <li>Which story most resonated — and why?</li>
+            <li>One tension you share. One hope you carry home.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Discuss</span></div>
+    </section>
+
+    <!-- ============ 16 · LIVE RESULTS (embedded dashboard) ============ -->
+    <section class="slide" data-tag="Live Results" data-embed="stage.html">
+      <span class="eyebrow">See The Room</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">See the results — live</h2></div>
+      <div class="body top">
+        <a class="embed-open" href="stage.html" target="_blank" rel="noopener">Open full screen ↗</a>
+        <div class="embed-frame" data-embed-slot>
+          <div class="embed-ph"><div class="ring"></div><div>Loading the room's live results…</div></div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Live Results</span></div>
+    </section>
+
+    <!-- ============ 17 · RESOURCES ============ -->
+    <section class="slide" data-tag="Resources">
+      <span class="eyebrow">Take It With You</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Take it with you</h2></div>
+      <p class="res-lead">Everything from today — scan to revisit.</p>
+      <div class="body">
+        <div class="res-grid">
+          <div class="res-item">
+            <div class="qr"><img src="assets/dashboard-qr.png" alt="QR to live survey results" /></div>
+            <p class="rlabel">Survey results</p>
+            <a class="reslink" href="dashboard-live.html">dashboard-live.html</a>
+          </div>
+          <div class="res-item">
+            <div class="qr"><img src="assets/handouts-qr.png" alt="QR to handouts" /></div>
+            <p class="rlabel">Handouts</p>
+            <a class="reslink" href="resources.html#handouts">resources.html#handouts</a>
+          </div>
+          <div class="res-item">
+            <div class="qr"><img src="assets/reports-qr.png" alt="QR to full reports" /></div>
+            <p class="rlabel">Full reports</p>
+            <a class="reslink" href="resources.html#reports">resources.html#reports</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Resources</span></div>
+    </section>
+
+  </div>
+  <button class="nav-arrow" id="next" aria-label="Next slide">&#8250;</button>
+</div>
+
+<div id="counter">1 / 17</div>
+<div id="hint">← → or Space to advance · F for full screen</div>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var counter = document.getElementById('counter');
+  var progress = document.getElementById('progress');
+  var hint = document.getElementById('hint');
+  var idx = 0;
+
+  // Fragment state per slide: how many frags are currently revealed.
+  var fragShown = slides.map(function(){ return 0; });
+
+  function fragsIn(i){ return slides[i].querySelectorAll('.frag'); }
+
+  function applyFrags(i){
+    var f = fragsIn(i);
+    for(var k=0;k<f.length;k++){
+      f[k].classList.toggle('shown', k < fragShown[i]);
+    }
+  }
+
+  // Lazy-load embedded iframe only when its slide is reached.
+  function ensureEmbed(i){
+    var s = slides[i];
+    var src = s.getAttribute('data-embed');
+    if(!src) return;
+    var slot = s.querySelector('[data-embed-slot]');
+    if(!slot || slot.getAttribute('data-loaded')) return;
+    slot.setAttribute('data-loaded','1');
+    var ifr = document.createElement('iframe');
+    ifr.setAttribute('title','Live results dashboard');
+    ifr.setAttribute('loading','lazy');
+    ifr.src = src;
+    ifr.addEventListener('load', function(){
+      var ph = slot.querySelector('.embed-ph');
+      if(ph) ph.style.display = 'none';
+    });
+    slot.appendChild(ifr);
+  }
+
+  function render(){
+    slides.forEach(function(s, i){
+      s.classList.remove('is-active','is-prev','is-next');
+      if(i === idx) s.classList.add('is-active');
+      else if(i < idx) s.classList.add('is-prev');
+      else s.classList.add('is-next');
+    });
+    applyFrags(idx);
+    ensureEmbed(idx);
+    counter.textContent = (idx+1) + ' / ' + total;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    // Reflect current slide in the hash for deep-linking / resume.
+    try{ history.replaceState(null, '', '#' + (idx+1)); }catch(e){}
+  }
+
+  function next(){
+    var f = fragsIn(idx);
+    if(fragShown[idx] < f.length){ fragShown[idx]++; applyFrags(idx); return; }
+    if(idx < total-1){ idx++; render(); }
+  }
+  function prev(){
+    var f = fragsIn(idx);
+    if(fragShown[idx] > 0){ fragShown[idx]--; applyFrags(idx); return; }
+    if(idx > 0){ idx--; fragShown[idx] = fragsIn(idx).length; render(); } // land with frags already shown when reversing in
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+
+  function toggleFull(){
+    var el = document.documentElement;
+    if(!document.fullscreenElement){
+      (el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);
+    } else {
+      (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
+    }
+  }
+
+  function hideHint(){ hint.classList.add('gone'); }
+  var hintTimer = setTimeout(hideHint, 6000);
+
+  document.addEventListener('keydown', function(e){
+    switch(e.key){
+      case 'ArrowRight': case ' ': case 'PageDown': case 'Spacebar':
+        e.preventDefault(); next(); hideHint(); break;
+      case 'ArrowLeft': case 'PageUp':
+        e.preventDefault(); prev(); hideHint(); break;
+      case 'f': case 'F':
+        e.preventDefault(); toggleFull(); break;
+      case 'Home': e.preventDefault(); go(0); break;
+      case 'End': e.preventDefault(); go(total-1); break;
+      default:
+        if(/^[0-9]$/.test(e.key)){ /* number quick-jump could go here */ }
+    }
+  });
+
+  // Click to advance (ignore links/buttons + the iframe area).
+  document.getElementById('deck').addEventListener('click', function(e){
+    if(e.target.closest('a,button,iframe,.embed-frame')) return;
+    next(); hideHint();
+  });
+  document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); next(); hideHint(); });
+  document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); prev(); hideHint(); });
+
+  // Touch swipe
+  var tx=0, ty=0;
+  document.addEventListener('touchstart', function(e){ tx=e.changedTouches[0].clientX; ty=e.changedTouches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ dx<0 ? next() : prev(); hideHint(); }
+  }, {passive:true});
+
+  // Resume from hash if present (e.g. #6).
+  var start = parseInt((location.hash||'').replace('#',''),10);
+  if(!isNaN(start) && start>=1 && start<=total){ idx = start-1; }
+  render();
+})();
+</script>
+</body>
+</html>
