@@ -120,6 +120,13 @@ ul.bullets li{
   margin-bottom:calc(var(--u)*1.3);
 }
 ul.bullets li:last-child{margin-bottom:0;}
+/* muted sub-line under a lead bullet (e.g. country list) — smaller, non-bold,
+   dotted list treatment matching the .cplace caption style; still projection-legible. */
+ul.bullets li .subline{
+  display:block; margin-top:calc(var(--u)*.35);
+  font-family:var(--sans); font-weight:400; color:var(--muted);
+  font-size:calc(var(--u)*1.5); line-height:1.15; letter-spacing:.02em;
+}
 ul.bullets li.hero{
   font-family:var(--serif); color:var(--accent-dk);
   font-size:calc(var(--u)*3.1); line-height:1.08;
@@ -412,8 +419,11 @@ ul.bias .tag{
 
 /* ---- Chrome: counter, progress, hint ---- */
 #hud{position:fixed; z-index:20; pointer-events:none;}
+/* Counter pill lifted ABOVE the footer band so it never overlaps the right-side
+   per-slide tag (e.g. "NORDIC", "USA") that lives in the same bottom-right corner.
+   Same treatment used for the hint pill. */
 #counter{
-  position:fixed; right:calc(var(--u)*2.0); bottom:calc(var(--u)*1.4); z-index:20;
+  position:fixed; right:calc(var(--u)*2.0); bottom:calc(var(--u)*5.2); z-index:20;
   font-family:var(--sans); font-weight:700; font-size:calc(var(--u)*1.6);
   color:rgba(255,255,255,.75); background:rgba(13,17,20,.55);
   padding:.3em .8em; border-radius:1em; letter-spacing:.06em;
@@ -598,9 +608,9 @@ ul.bias .tag{
       <div class="titleblock"><span class="bar"></span><h2 class="title">One shared language. Four countries.</h2></div>
       <div class="body">
         <ul class="bullets">
-          <li class="frag">From Chinese to Nordic to English</li>
+          <li class="frag">One church across four countries<span class="subline">Sweden · Norway · Finland · Denmark</span></li>
+          <li class="frag">From Chinese to Nordic languages to English</li>
           <li class="frag">Everyone speaks English</li>
-          <li class="frag">One church across four countries</li>
         </ul>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
