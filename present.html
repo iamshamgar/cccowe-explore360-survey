@@ -144,6 +144,13 @@ ul.summary li{
   margin-bottom:calc(var(--u)*1.05);
 }
 ul.summary li:last-child{margin-bottom:0;}
+/* two-column variant of the summary list — for slides with many short items
+   (e.g. the seven diversities). Balances items across two columns and keeps
+   each line projection-legible. */
+ul.summary.two-col{
+  column-count:2; column-gap:calc(var(--u)*3.2);
+}
+ul.summary.two-col li{break-inside:avoid;}
 ul.summary li::before{
   content:""; position:absolute; left:0; top:.5em;
   width:calc(var(--u)*1.0); height:calc(var(--u)*1.0);
@@ -735,13 +742,11 @@ ul.bias .tag{
     <!-- ============ 17 · G · COGNITIVE BIASES ============ -->
     <section class="slide" data-tag="USA">
       <span class="eyebrow">USA · A word to leaders</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">Don't assume your church is every church.</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Two questions for ourselves</h2></div>
       <div class="body">
-        <ul class="bias">
-          <li class="frag"><span class="lead">You assume every church is like yours.</span><br><span class="tag">false consensus</span></li>
-          <li class="frag"><span class="lead">A healthy church assumes IT is the odd exception.</span><br><span class="tag">imposter syndrome, the reverse</span></li>
-          <li class="frag"><span class="lead">You seek out others who agree you're struggling.</span><br><span class="tag">confirmation bias</span></li>
-          <li class="frag"><span class="lead">The loudest, most visible churches feel like the whole story.</span><br><span class="tag">availability</span></li>
+        <ul class="bullets">
+          <li class="frag">Do we assume every church is like our church?</li>
+          <li class="frag">Do we seek out others who share our struggle, or also those further down the road?</li>
         </ul>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
@@ -753,23 +758,43 @@ ul.bias .tag{
       <div class="titleblock"><span class="bar"></span><h2 class="title">If there was no exodus, what now?</h2></div>
       <div class="body">
         <ul class="bullets">
-          <li class="frag">Look beyond churches like yours</li>
-          <li class="frag">Ask what our theology needs to rethink</li>
+          <li class="frag">Look beyond churches that may have a different experience than yours.</li>
+          <li class="frag">Ask what theology and assumptions we may need to reconsider.</li>
+          <li class="frag">Reconsider a biblical definition of diversity.</li>
         </ul>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
-    <!-- ============ 19 · H2 · IMPLICATIONS, part 2 ============ -->
+    <!-- ============ 19 · H2 · A DIVERSITY OF DIVERSITIES ============ -->
     <section class="slide" data-tag="USA">
       <span class="eyebrow">USA · An invitation</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">If there was no exodus, what now?</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">A Diversity of Diversities</h2></div>
       <div class="body">
-        <ul class="bullets">
-          <li class="frag">A truly global diaspora, worth studying</li>
-          <li class="frag">Much to offer, all glory to God</li>
+        <ul class="summary two-col">
+          <li class="frag">Generational diversity</li>
+          <li class="frag">Linguistic diversity</li>
+          <li class="frag">Cultural diversity</li>
+          <li class="frag">Political diversity</li>
+          <li class="frag">National diversity</li>
+          <li class="frag">Socioeconomic diversity</li>
+          <li class="frag">Ethnic &amp; racial diversity</li>
         </ul>
-        <p class="footnote">“The typical US Chinese heritage church may be more diverse than a typical white American megachurch.” — Enoch Liao, “a diversity of diversities,” Letter to the Asian American Church</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 19b · H2q · PULL QUOTE (a diversity of diversities) ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · An invitation</span>
+      <div class="body" style="justify-content:center;">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="quote">The typical US Chinese heritage church may be more diverse than a typical white American megachurch.</p>
+            <p class="attrib">— Enoch Liao, “a diversity of diversities,” Letter to the Asian American Church</p>
+          </div>
+        </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
