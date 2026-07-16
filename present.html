@@ -241,6 +241,81 @@ ol.prompts li::before{
 .res-item a.reslink{font-family:var(--sans); font-size:calc(var(--u)*1.5); color:var(--accent); text-decoration:none; margin-top:calc(var(--u)*.5);}
 .res-item a.reslink:hover{text-decoration:underline;}
 
+/* bias list — plain lead line with a small secondary tag underneath */
+ul.bias{list-style:none;}
+ul.bias li{
+  position:relative; padding-left:calc(var(--u)*3.0);
+  margin-bottom:calc(var(--u)*1.7);
+}
+ul.bias li:last-child{margin-bottom:0;}
+ul.bias li::before{
+  content:""; position:absolute; left:0; top:.34em;
+  width:calc(var(--u)*1.15); height:calc(var(--u)*1.15);
+  background:var(--accent); border-radius:50%;
+}
+ul.bias .lead{
+  font-family:var(--sans); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*3.0); line-height:1.1;
+}
+ul.bias .tag{
+  display:inline-block; margin-top:calc(var(--u)*.5);
+  font-family:var(--sans); font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  font-size:calc(var(--u)*1.4); color:var(--accent-dk);
+  background:var(--wash); border:1px solid var(--rule);
+  padding:.28em .7em; border-radius:2em;
+}
+
+/* payoff slide — big serif line + smaller sub */
+.payoff{font-family:var(--serif); font-weight:700; font-style:italic; color:var(--accent-dk);
+  font-size:calc(var(--u)*4.6); line-height:1.1;}
+.payoff-sub{font-family:var(--serif); color:var(--ink-soft); font-size:calc(var(--u)*2.7);
+  line-height:1.2; margin-top:calc(var(--u)*1.6);}
+
+/* empty title card (spoken stories) — a quiet centered statement */
+.quiet-note{font-family:var(--sans); font-style:italic; color:var(--muted);
+  font-size:calc(var(--u)*2.0); margin-top:calc(var(--u)*1.6);}
+
+/* photo timeline — STYLED PLACEHOLDER cards only (no real images, public site) */
+.timeline{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:calc(var(--u)*1.5);
+  flex:1 1 auto; align-content:center; min-height:0;
+}
+.tl-card{
+  display:flex; flex-direction:column; background:var(--paper);
+  border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+}
+.tl-frame{
+  position:relative; flex:1 1 auto; min-height:calc(var(--u)*9);
+  background:
+    repeating-linear-gradient(135deg,var(--wash),var(--wash) calc(var(--u)*1.4),#eef2f3 calc(var(--u)*1.4),#eef2f3 calc(var(--u)*2.8));
+  border-bottom:1px solid var(--rule);
+  display:flex; align-items:center; justify-content:center;
+}
+.tl-frame::after{
+  content:"PHOTO"; font-family:var(--sans); font-weight:700; letter-spacing:.22em;
+  font-size:calc(var(--u)*1.3); color:#9aa4a8;
+}
+.tl-frame .ph-icon{
+  position:absolute; width:calc(var(--u)*3.4); height:calc(var(--u)*3.4);
+  border:2px solid #b7c0c3; border-radius:4px; opacity:.6;
+  top:calc(var(--u)*1.2); left:50%; transform:translateX(-50%);
+  display:none;
+}
+.tl-meta{padding:calc(var(--u)*1.0) calc(var(--u)*1.1) calc(var(--u)*1.2);}
+.tl-year{font-family:var(--serif); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*2.3); line-height:1;}
+.tl-event{font-family:var(--sans); color:var(--ink); font-size:calc(var(--u)*1.55); line-height:1.15; margin-top:calc(var(--u)*.5);}
+/* upcoming "next" card — clearly forward-looking, not a past photo */
+.tl-card.next{border:2px dashed var(--accent);}
+.tl-card.next .tl-frame{background:var(--wash);}
+.tl-card.next .tl-frame::after{content:"UPCOMING"; color:var(--accent);}
+.tl-card.next .tl-year{color:var(--accent);}
+.tl-badge{
+  position:absolute; top:calc(var(--u)*.7); right:calc(var(--u)*.7);
+  font-family:var(--sans); font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  font-size:calc(var(--u)*1.1); color:#fff; background:var(--accent);
+  padding:.2em .6em; border-radius:2em;
+}
+
 /* footnote / discreet source line at bottom of a slide */
 .footnote{
   font-family:var(--sans); color:var(--muted);
@@ -483,14 +558,44 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
     </section>
 
-    <!-- ============ 10 · USA POINTS ============ -->
+    <!-- ============ 10 · A · GENERATIONS QUESTION v1 ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">How many generations are in your church?</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">First generation</li>
+          <li class="frag">Second generation</li>
+          <li class="frag">Third generation</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 11 · B · USA SNAPSHOT ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">A church with a long history</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">In America for over 150 years</li>
+          <li class="frag">Four waves of immigrants, still arriving</li>
+          <li class="frag">Gold Rush · Taiwan · Hong Kong · Mainland China</li>
+          <li class="frag">Four waves, one roof</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 12 · C · SILENT EXODUS MYTH ============ -->
     <section class="slide" data-tag="USA">
       <span class="eyebrow">USA · Enoch Liao · Boston</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Was There a Silent Exodus?</h2></div>
       <div class="body">
         <ul class="bullets">
           <li class="frag">Two-thirds actually stayed</li>
-          <li class="frag">Most who left joined 'the nones,' like all of America</li>
+          <li class="frag">Most who left joined “the nones,” like all of America</li>
+          <li class="frag">We mostly hear from the churches that are struggling</li>
           <li class="frag hero">Those who stayed go to church MORE than white Protestants</li>
         </ul>
         <p class="source-line">Chen &amp; Park, JSSR 2019; Park &amp; Tom, AAPI Voices 2014.</p>
@@ -498,7 +603,7 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
-    <!-- ============ 11 · USA QUOTE (Silent Exodus finding) ============ -->
+    <!-- ============ 13 · D · PARK QUOTE ============ -->
     <section class="slide" data-tag="USA">
       <span class="eyebrow">USA · The Silent Exodus, Reconsidered</span>
       <div class="body">
@@ -513,7 +618,90 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
-    <!-- ============ 12 · CONCLUSION — Many variables, one sovereign God ============ -->
+    <!-- ============ 14 · E · GENERATIONS QUESTION v2 (the reveal) ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">How many generations are in your church?</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">First generation</li>
+          <li class="frag">Second generation</li>
+          <li class="frag">Third generation</li>
+          <li class="frag">Fourth generation</li>
+          <li class="frag">Fifth generation</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 15 · E-payoff · PAYOFF ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="body">
+        <div class="quote-wrap">
+          <span class="qbar"></span>
+          <div>
+            <p class="payoff">My adult kids are fourth and fifth generation.</p>
+            <p class="payoff-sub">Fourth on my side. Fifth on my wife's.</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 16 · F · PERSONAL STORIES (title card) ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Two rooms. Same surprise.</h2></div>
+      <div class="body">
+        <p class="quiet-note">(Two stories, told aloud.)</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 17 · G · COGNITIVE BIASES ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · A word to leaders</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Don't assume your church is every church.</h2></div>
+      <div class="body">
+        <ul class="bias">
+          <li class="frag"><span class="lead">You assume every church is like yours.</span><br><span class="tag">false consensus</span></li>
+          <li class="frag"><span class="lead">A healthy church assumes IT is the odd exception.</span><br><span class="tag">imposter syndrome, the reverse</span></li>
+          <li class="frag"><span class="lead">You seek out others who agree you're struggling.</span><br><span class="tag">confirmation bias</span></li>
+          <li class="frag"><span class="lead">The loudest, most visible churches feel like the whole story.</span><br><span class="tag">availability</span></li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 18 · H1 · IMPLICATIONS, part 1 ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · An invitation</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">If there was no exodus, what now?</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Look beyond churches like yours</li>
+          <li class="frag">Ask what our theology needs to rethink</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 19 · H2 · IMPLICATIONS, part 2 ============ -->
+    <section class="slide" data-tag="USA">
+      <span class="eyebrow">USA · An invitation</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">If there was no exodus, what now?</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">A truly global diaspora, worth studying</li>
+          <li class="frag">Much to offer, all glory to God</li>
+        </ul>
+        <p class="footnote">“The typical US Chinese heritage church may be more diverse than a typical white American megachurch.” — Enoch Liao, “a diversity of diversities,” Letter to the Asian American Church</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
+    </section>
+
+    <!-- ============ 20 · MV · MANY VARIABLES (kept, repositioned here) ============ -->
     <section class="slide" data-tag="Conclusion">
       <span class="eyebrow">The factors I'm studying</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Many variables. One sovereign God.</h2></div>
@@ -530,27 +718,46 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Conclusion</span></div>
     </section>
 
-    <!-- ============ 13 · CLOSING DISCUSSION ============ -->
+    <!-- ============ 21 · I · PHOTO TIMELINE (STYLED PLACEHOLDERS ONLY — no real images) ============ -->
+    <section class="slide" data-tag="CHCC">
+      <span class="eyebrow">USA · The people you assume do not exist</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Chinese Heritage Church Collaborative</h2></div>
+      <div class="body">
+        <div class="timeline">
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2019</p><p class="tl-event">Pastors Colloquium</p></div></div>
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2020</p><p class="tl-event">Online (Zoom)</p></div></div>
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2023</p><p class="tl-event">First National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2024</p><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2025</p><p class="tl-event">National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2026</p><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card next"><div class="tl-frame"><span class="tl-badge">Next</span></div><div class="tl-meta"><p class="tl-year">2027</p><p class="tl-event">National Gathering / Ministers Collective<br><small>Tentative: Chicagoland, IL · May 2027</small></p></div></div>
+        </div>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">CHCC</span></div>
+    </section>
+
+    <!-- ============ 22 · J · CLOSING DISCUSSION (replaces prior) ============ -->
     <section class="slide wash" data-tag="Discuss">
       <span class="spine"></span>
       <div class="disc-head">
         <span class="eyebrow">At Your Tables</span>
         <span class="chip">16 min</span>
       </div>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">At Your Tables — Taking It Home</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">At Your Tables — A Look in the Mirror</h2></div>
       <div class="body">
         <div class="disc-card"><span class="cbar"></span>
-          <p class="disc-intro">Take 16 minutes together:</p>
+          <p class="disc-intro">Take 16 minutes together. Be honest with each other:</p>
           <ol class="prompts">
-            <li>Which story most resonated — and why?</li>
-            <li>One tension you share. One hope you carry home.</li>
+            <li>Have you assumed most US Chinese heritage churches are only first and second generation?</li>
+            <li>Have you assumed everyone is losing their young people, that the “silent exodus” is the whole story?</li>
+            <li>Have you quietly lost hope in your English-speaking ministry because of these assumptions?</li>
           </ol>
         </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Discuss</span></div>
     </section>
 
-    <!-- ============ 14 · LIVE RESULTS (embedded dashboard) ============ -->
+    <!-- ============ 23 · LIVE RESULTS (embedded dashboard) ============ -->
     <section class="slide" data-tag="Live Results" data-embed="stage.html">
       <span class="eyebrow">See The Room</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">See the results — live</h2></div>
@@ -563,7 +770,7 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Live Results</span></div>
     </section>
 
-    <!-- ============ 15 · RESOURCES ============ -->
+    <!-- ============ 24 · RESOURCES ============ -->
     <section class="slide" data-tag="Resources">
       <span class="eyebrow">Take It With You</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Take it with you</h2></div>
@@ -594,7 +801,7 @@ ol.prompts li::before{
   <button class="nav-arrow" id="next" aria-label="Next slide">&#8250;</button>
 </div>
 
-<div id="counter">1 / 15</div>
+<div id="counter">1 / 24</div>
 <div id="hint">← → or Space to advance · F for full screen</div>
 
 <script>
