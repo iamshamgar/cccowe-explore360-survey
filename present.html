@@ -278,6 +278,31 @@ ol.prompts.prompts-tight li::before{font-size:calc(var(--u)*1.62);}
 }
 .embed-open:hover{text-decoration:underline;}
 
+/* ---- Embed-slide escape-hatch nav ----
+   On the live-results slide the iframe captures keyboard focus, so arrow keys
+   go to the dashboard, not the deck. These parent-document buttons advance the
+   deck on CLICK (not a key event), so they work even while the iframe has focus.
+   Shown only while a slide with an iframe is active (toggled via body class). */
+#embed-nav{
+  position:fixed; z-index:30;
+  right:calc(var(--u)*2.0); bottom:calc(var(--u)*8.4);
+  display:none; gap:calc(var(--u)*.8);
+  pointer-events:auto;
+}
+body.embed-active #embed-nav{display:flex;}
+#embed-nav button{
+  font-family:var(--sans); font-weight:700;
+  font-size:calc(var(--u)*1.5); letter-spacing:.03em;
+  color:#fff; background:var(--accent);
+  border:1px solid var(--accent-dk); border-radius:.4em;
+  padding:.5em 1.05em; cursor:pointer;
+  box-shadow:0 2px 10px rgba(13,17,20,.35);
+  transition:background .18s ease, transform .06s ease;
+}
+#embed-nav button:hover{background:var(--accent-dk);}
+#embed-nav button:active{transform:translateY(1px);}
+#embed-nav button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+
 /* resources 3-up QR */
 .res-lead{font-family:var(--serif); font-style:italic; color:var(--ink-soft); font-size:calc(var(--u)*1.9); margin-top:calc(var(--u)*1.0); flex:0 0 auto;}
 .res-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:calc(var(--u)*2.4); flex:1 1 auto; align-content:center; justify-items:center;}
@@ -905,6 +930,14 @@ ul.bias .tag{
 <div id="counter">1 / 24</div>
 <div id="hint">← → or Space to advance · F for full screen</div>
 
+<!-- Escape-hatch nav for the embedded-dashboard slide. Parent-document clicks
+     advance the deck even while the iframe holds keyboard focus. Shown only on
+     iframe slides via the body.embed-active class. -->
+<div id="embed-nav" aria-label="Slide navigation for live results">
+  <button type="button" id="embed-prev" aria-label="Previous slide">← Back</button>
+  <button type="button" id="embed-next" aria-label="Next slide">Next →</button>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -955,6 +988,9 @@ ul.bias .tag{
     });
     applyFrags(idx);
     ensureEmbed(idx);
+    // Show the click-to-advance escape-hatch nav only on slides that embed an
+    // iframe (the live-results dashboard), where keyboard focus can be trapped.
+    document.body.classList.toggle('embed-active', !!slides[idx].getAttribute('data-embed'));
     counter.textContent = (idx+1) + ' / ' + total;
     progress.style.width = ((idx+1)/total*100) + '%';
     // Reflect current slide in the hash for deep-linking / resume.
@@ -1007,6 +1043,30 @@ ul.bias .tag{
   });
   document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); next(); hideHint(); });
   document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); prev(); hideHint(); });
+
+  // Escape-hatch nav buttons for the embedded-dashboard slide.
+  // These live in the PARENT document, so a click advances the deck even while
+  // the iframe holds keyboard focus (a click is not a key event). This is the
+  // core fix for the focus trap. Return focus to the deck afterward so plain
+  // arrow keys work again immediately.
+  var deck = document.getElementById('deck');
+  deck.setAttribute('tabindex','-1');
+  function refocusDeck(){
+    var ae = document.activeElement;
+    if(ae && ae.tagName === 'IFRAME'){ try{ ae.blur(); }catch(e){} }
+    try{ deck.focus({preventScroll:true}); }catch(e){ deck.focus(); }
+  }
+  document.getElementById('embed-next').addEventListener('click', function(e){ e.stopPropagation(); next(); hideHint(); refocusDeck(); });
+  document.getElementById('embed-prev').addEventListener('click', function(e){ e.stopPropagation(); prev(); hideHint(); refocusDeck(); });
+
+  // Click-to-refocus: a mousedown anywhere in the deck OUTSIDE the iframe pulls
+  // keyboard focus back to the parent document, so the presenter can click the
+  // slide margin and resume using arrow keys. Clicks INSIDE the iframe are left
+  // alone so the dashboard keeps its own arrow-key navigation.
+  document.getElementById('stage').addEventListener('mousedown', function(e){
+    if(e.target.closest('iframe')) return;   // let the dashboard keep focus
+    refocusDeck();
+  }, true);
 
   // Touch swipe
   var tx=0, ty=0;
