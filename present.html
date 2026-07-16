@@ -407,6 +407,24 @@ ul.bias .tag{
 .frag{opacity:0; transform:translateY(6px); transition:opacity .34s ease, transform .34s ease;}
 .frag.shown{opacity:1; transform:none;}
 
+/* ---- Section divider slides (one per pastor) ----
+   A quiet full-slide interstitial: region eyebrow, very large serif name,
+   accent rule, church line, muted meta (location · tenure). Wash background
+   + spine bar mark it as a structural beat, distinct from content slides. */
+.divider .div-name{
+  font-family:var(--serif); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*5.6); line-height:1.04; letter-spacing:-.01em;
+}
+.divider .div-church{
+  font-family:var(--serif); font-style:italic; color:var(--accent-dk);
+  font-size:calc(var(--u)*2.5); line-height:1.16; margin-top:calc(var(--u)*.4);
+}
+.divider .div-meta{
+  font-family:var(--sans); color:var(--muted);
+  font-size:calc(var(--u)*1.7); letter-spacing:.02em; line-height:1.3;
+  margin-top:calc(var(--u)*1.2);
+}
+
 /* ---- Footer band (per-slide, matches handout footer) ----
    Fixed-height safe-area at the slide bottom. Three-column grid:
    [left descriptor · 1fr] [center copyright · auto] [right tag · 1fr].
@@ -489,6 +507,81 @@ ul.bias .tag{
 #prev{left:calc(var(--u)*1.2);}
 #next{right:calc(var(--u)*1.2);}
 
+/* ---- Quick navigation: collapsible table of contents ----
+   Zero footprint when closed except a small pill in the bottom-left corner
+   (mirrors the counter pill bottom-right, same chrome treatment). Panel slides
+   in from the left on demand; closes on selection, Esc, outside click, or M.
+   Transform/opacity only — no layout animation. */
+#toc-btn{
+  /* z-index sits BELOW the scrim (39) and panel (40): while the panel is open
+     the pill tucks away behind it instead of floating over the list. */
+  position:fixed; left:calc(var(--u)*2.0); bottom:calc(var(--u)*5.2); z-index:38;
+  font-family:var(--sans); font-weight:700; font-size:calc(var(--u)*1.6);
+  color:rgba(255,255,255,.75); background:rgba(13,17,20,.55);
+  border:none; cursor:pointer;
+  padding:.3em .8em; border-radius:1em; letter-spacing:.06em; line-height:1.2;
+  transition:color .2s ease, background .2s ease;
+}
+#toc-btn:hover{color:#fff; background:rgba(13,17,20,.8);}
+#toc-btn:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+/* invisible scrim: catches outside clicks while the panel is open and blocks
+   the deck's click-to-advance so an errant click can't change slides */
+#toc-scrim{
+  position:fixed; inset:0; z-index:39; background:rgba(13,17,20,.25);
+  opacity:0; visibility:hidden;
+  transition:opacity .28s ease, visibility 0s linear .28s;
+}
+#toc{
+  position:fixed; left:0; top:0; bottom:0; z-index:40;
+  width:min(calc(var(--u)*30), 82vw);
+  background:var(--paper);
+  border-right:1px solid var(--rule);
+  box-shadow:10px 0 44px rgba(13,17,20,.35);
+  display:flex; flex-direction:column;
+  padding:calc(var(--u)*2.4) 0 calc(var(--u)*1.6);
+  transform:translateX(-103%);
+  visibility:hidden;
+  transition:transform .3s ease, visibility 0s linear .3s;
+  will-change:transform;
+}
+body.toc-open #toc{transform:none; visibility:visible; transition:transform .3s ease;}
+body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s ease;}
+#toc .toc-head{
+  font-family:var(--sans); font-weight:700; color:var(--accent-dk);
+  font-size:calc(var(--u)*1.2); letter-spacing:.18em; text-transform:uppercase;
+  padding:0 calc(var(--u)*2.2) calc(var(--u)*1.0);
+  border-bottom:1px solid var(--rule);
+}
+#toc ol{
+  list-style:none; flex:1 1 auto; min-height:0; overflow-y:auto;
+  padding:calc(var(--u)*.8) 0;
+}
+#toc a{
+  position:relative; display:block; text-decoration:none;
+  padding:calc(var(--u)*.72) calc(var(--u)*2.2);
+  font-family:var(--sans); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*1.55); line-height:1.2;
+}
+#toc a .toc-sub{
+  display:block; font-weight:400; color:var(--muted);
+  font-size:calc(var(--u)*1.15); margin-top:calc(var(--u)*.15);
+}
+#toc a:hover{background:var(--wash);}
+#toc a:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
+/* current section: wash band + accent spine, mirroring the deck's spine motif */
+#toc a.current{background:var(--wash); color:var(--accent-dk);}
+#toc a.current::before{
+  content:""; position:absolute; left:0; top:0; bottom:0;
+  width:calc(var(--u)*.5); background:var(--accent);
+}
+#toc .toc-keys{
+  font-family:var(--sans); color:var(--muted);
+  font-size:calc(var(--u)*1.05); line-height:1.5; letter-spacing:.02em;
+  padding:calc(var(--u)*1.0) calc(var(--u)*2.2) 0;
+  border-top:1px solid var(--rule);
+}
+#toc .toc-keys b{color:var(--ink-soft);}
+
 /* ---- Responsive: on narrow/portrait screens, stack the split & cols ---- */
 @media (max-aspect-ratio:1/1){
   :root{--u: min(3.0vw, 1.7vh);}
@@ -501,7 +594,7 @@ ul.bias .tag{
 @media print{
   body{background:#fff; overflow:visible;}
   #stage,#deck{position:static; width:auto; height:auto; box-shadow:none;}
-  #counter,#progress,#hint,.nav-arrow{display:none;}
+  #counter,#progress,#hint,.nav-arrow,#toc,#toc-btn,#toc-scrim,#embed-nav{display:none;}
   .slide{position:static; opacity:1 !important; visibility:visible !important; transform:none !important;
     page-break-after:always; height:100vh; border-bottom:1px solid #ccc;}
   .frag{opacity:1 !important; transform:none !important;}
@@ -518,7 +611,7 @@ ul.bias .tag{
   <div id="deck">
 
     <!-- ============ 1 · TITLE ============ -->
-    <section class="slide title-slide" data-tag="">
+    <section class="slide title-slide" id="start" data-tag="">
       <span class="spine"></span>
       <span class="eyebrow">Explore360 · Breakout Session</span>
       <div class="body top" style="justify-content:center;">
@@ -532,7 +625,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 2 · SURVEY ============ -->
-    <section class="slide" data-tag="Survey">
+    <section class="slide" id="survey" data-tag="Survey">
       <span class="eyebrow">Before We Start</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Scan to take the survey</h2></div>
       <div class="body center">
@@ -552,7 +645,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 3 · FRAMING ============ -->
-    <section class="slide" data-tag="Framing">
+    <section class="slide" id="framing" data-tag="Framing">
       <span class="eyebrow">The Frame</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Three pastors. Three cities. Three stories.</h2></div>
       <div class="body center">
@@ -607,6 +700,19 @@ ul.bias .tag{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Discuss</span></div>
     </section>
 
+    <!-- ============ 5a · SECTION DIVIDER · UK ============ -->
+    <section class="slide wash divider" id="uk" data-tag="UK">
+      <span class="spine"></span>
+      <span class="eyebrow">United Kingdom · Birmingham</span>
+      <div class="body center">
+        <h2 class="div-name">Pastor Bert Han</h2>
+        <div class="rule-mark"></div>
+        <p class="div-church">Birmingham Chinese Evangelical Church</p>
+        <p class="div-meta">24 years at the church · 30 years of ministry in the UK</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">UK</span></div>
+    </section>
+
     <!-- ============ 6 · UK POINTS ============ -->
     <section class="slide" data-tag="UK">
       <span class="eyebrow">UK · Bert Han · Birmingham</span>
@@ -637,6 +743,19 @@ ul.bias .tag{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">UK</span></div>
     </section>
 
+    <!-- ============ 7a · SECTION DIVIDER · NORDIC ============ -->
+    <section class="slide wash divider" id="nordic" data-tag="Nordic">
+      <span class="spine"></span>
+      <span class="eyebrow">Nordic Region · Stockholm</span>
+      <div class="body center">
+        <h2 class="div-name">Pastor Billy Lo</h2>
+        <div class="rule-mark"></div>
+        <p class="div-church">Stockholm Chinese Christian Church</p>
+        <p class="div-meta">Part of the Nordic Chinese Christian Church · Pastoring his home church for 23 years</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
+    </section>
+
     <!-- ============ 8 · NORDIC POINTS ============ -->
     <section class="slide" data-tag="Nordic">
       <span class="eyebrow">Nordic · Billy Lo · Stockholm</span>
@@ -664,6 +783,19 @@ ul.bias .tag{
         </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
+    </section>
+
+    <!-- ============ 9a · SECTION DIVIDER · USA ============ -->
+    <section class="slide wash divider" id="usa" data-tag="USA">
+      <span class="spine"></span>
+      <span class="eyebrow">United States · Boston</span>
+      <div class="body center">
+        <h2 class="div-name">Pastor Enoch Liao</h2>
+        <div class="rule-mark"></div>
+        <p class="div-church">Boston Chinese Evangelical Church</p>
+        <p class="div-meta">Serving at the church since 2001</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
     <!-- ============ 10 · A · GENERATIONS QUESTION v1 ============ -->
@@ -828,7 +960,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 20 · MV · MANY VARIABLES (kept, repositioned here) ============ -->
-    <section class="slide" data-tag="Conclusion">
+    <section class="slide" id="conclusion" data-tag="Conclusion">
       <span class="eyebrow">The factors I'm studying</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Many variables. One sovereign God.</h2></div>
       <div class="body">
@@ -845,7 +977,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 21 · I · PHOTO TIMELINE (STYLED PLACEHOLDERS ONLY — no real images) ============ -->
-    <section class="slide" data-tag="CHCC">
+    <section class="slide" id="chcc" data-tag="CHCC">
       <span class="eyebrow">USA · The people you assume do not exist</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Chinese Heritage Church Collaborative</h2></div>
       <div class="body center">
@@ -863,7 +995,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 22 · J · CLOSING DISCUSSION (replaces prior) ============ -->
-    <section class="slide wash" data-tag="Discuss">
+    <section class="slide wash" id="closing" data-tag="Discuss">
       <span class="spine"></span>
       <div class="disc-head">
         <span class="eyebrow">At Your Tables</span>
@@ -884,7 +1016,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 23 · LIVE RESULTS (embedded dashboard) ============ -->
-    <section class="slide" data-tag="Live Results" data-embed="stage.html">
+    <section class="slide" id="live" data-tag="Live Results" data-embed="stage.html">
       <span class="eyebrow">See The Room</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">See the results — live</h2></div>
       <div class="body top">
@@ -897,7 +1029,7 @@ ul.bias .tag{
     </section>
 
     <!-- ============ 24 · RESOURCES ============ -->
-    <section class="slide" data-tag="Resources">
+    <section class="slide" id="resources" data-tag="Resources">
       <span class="eyebrow">Take It With You</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Take it with you</h2></div>
       <p class="res-lead">Everything from today — scan to revisit.</p>
@@ -927,8 +1059,31 @@ ul.bias .tag{
   <button class="nav-arrow" id="next" aria-label="Next slide">&#8250;</button>
 </div>
 
-<div id="counter">1 / 24</div>
-<div id="hint">← → or Space to advance · F for full screen</div>
+<div id="counter">1 / 28</div>
+<div id="hint">← → or Space to advance · Shift+→ skip slide · M for menu · F for full screen</div>
+
+<!-- Collapsible table of contents. Zero footprint when closed except the ☰ pill
+     (bottom-left, mirroring the counter pill). Anchors are NAMED slide ids, so
+     deep links like present.html#usa survive future slide insertions. -->
+<button type="button" id="toc-btn" aria-label="Table of contents" aria-controls="toc" aria-expanded="false">☰ Menu</button>
+<div id="toc-scrim"></div>
+<nav id="toc" aria-label="Table of contents" aria-hidden="true">
+  <p class="toc-head">Contents</p>
+  <ol>
+    <li><a href="#start">Opening<span class="toc-sub">Title · The Evolving Chinese Church</span></a></li>
+    <li><a href="#survey">Survey<span class="toc-sub">Scan to take the survey</span></a></li>
+    <li><a href="#framing">The Frame<span class="toc-sub">Three pastors · throughlines · table discussion</span></a></li>
+    <li><a href="#uk">Pastor Bert Han<span class="toc-sub">Birmingham · United Kingdom</span></a></li>
+    <li><a href="#nordic">Pastor Billy Lo<span class="toc-sub">Stockholm · Nordic region</span></a></li>
+    <li><a href="#usa">Pastor Enoch Liao<span class="toc-sub">Boston · USA</span></a></li>
+    <li><a href="#conclusion">Many Variables<span class="toc-sub">One sovereign God</span></a></li>
+    <li><a href="#chcc">CHCC<span class="toc-sub">Chinese Heritage Church Collaborative</span></a></li>
+    <li><a href="#closing">Closing Discussion<span class="toc-sub">A look in the mirror</span></a></li>
+    <li><a href="#live">Live Results<span class="toc-sub">See the room's survey answers</span></a></li>
+    <li><a href="#resources">Resources<span class="toc-sub">Take it with you</span></a></li>
+  </ol>
+  <p class="toc-keys"><b>← →</b> advance builds &amp; slides · <b>Shift+← →</b> skip whole slide · <b>M</b> menu · <b>Esc</b> close · <b>F</b> full screen</p>
+</nav>
 
 <!-- Escape-hatch nav for the embedded-dashboard slide. Parent-document clicks
      advance the deck even while the iframe holds keyboard focus. Shown only on
@@ -994,7 +1149,10 @@ ul.bias .tag{
     counter.textContent = (idx+1) + ' / ' + total;
     progress.style.width = ((idx+1)/total*100) + '%';
     // Reflect current slide in the hash for deep-linking / resume.
-    try{ history.replaceState(null, '', '#' + (idx+1)); }catch(e){}
+    // Named anchors (slide ids like #usa) are preferred over bare indices so
+    // shared links survive future slide insertions; numeric is the fallback.
+    try{ history.replaceState(null, '', '#' + (slides[idx].id || (idx+1))); }catch(e){}
+    markTocCurrent();
   }
 
   function next(){
@@ -1007,7 +1165,57 @@ ul.bias .tag{
     if(fragShown[idx] > 0){ fragShown[idx]--; applyFrags(idx); return; }
     if(idx > 0){ idx--; fragShown[idx] = fragsIn(idx).length; render(); } // land with frags already shown when reversing in
   }
-  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  // Direct jump (TOC, deep link, Home/End): land with ALL builds revealed —
+  // same convention as reversing into a slide, so jumped-to content is complete.
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    fragShown[idx] = fragsIn(idx).length;
+    render();
+  }
+  // Whole-slide skip (Shift+Arrow): complete every remaining build on the
+  // current slide, then move a full slide in one action.
+  function skipNext(){
+    fragShown[idx] = fragsIn(idx).length; applyFrags(idx);
+    if(idx < total-1){ idx++; render(); }
+  }
+  function skipPrev(){
+    if(idx > 0){ fragShown[idx] = 0; applyFrags(idx); idx--; fragShown[idx] = fragsIn(idx).length; render(); }
+  }
+
+  // ---- Collapsible table of contents ----
+  var tocBtn = document.getElementById('toc-btn');
+  var tocPanel = document.getElementById('toc');
+  var tocScrim = document.getElementById('toc-scrim');
+  var tocLinks = Array.prototype.slice.call(tocPanel.querySelectorAll('a[href^="#"]'));
+  // Map each TOC link to its slide index via the slide's id.
+  var anchorIndex = {};
+  slides.forEach(function(s, i){ if(s.id) anchorIndex[s.id] = i; });
+
+  function tocOpen(){ document.body.classList.add('toc-open'); tocBtn.setAttribute('aria-expanded','true'); tocPanel.setAttribute('aria-hidden','false'); }
+  function tocClose(){ document.body.classList.remove('toc-open'); tocBtn.setAttribute('aria-expanded','false'); tocPanel.setAttribute('aria-hidden','true'); }
+  function tocToggle(){ document.body.classList.contains('toc-open') ? tocClose() : tocOpen(); }
+
+  // Highlight the TOC entry whose section contains the current slide
+  // (entry's slide index <= idx, and no later entry is <= idx).
+  function markTocCurrent(){
+    var best = null;
+    tocLinks.forEach(function(a){
+      var i = anchorIndex[a.getAttribute('href').slice(1)];
+      if(typeof i === 'number' && i <= idx) best = a;
+    });
+    tocLinks.forEach(function(a){ a.classList.toggle('current', a === best); });
+  }
+
+  tocBtn.addEventListener('click', function(e){ e.stopPropagation(); tocToggle(); hideHint(); });
+  tocScrim.addEventListener('click', tocClose);
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      var i = anchorIndex[a.getAttribute('href').slice(1)];
+      if(typeof i === 'number'){ go(i); }
+      tocClose(); hideHint();
+    });
+  });
 
   function toggleFull(){
     var el = document.documentElement;
@@ -1024,11 +1232,15 @@ ul.bias .tag{
   document.addEventListener('keydown', function(e){
     switch(e.key){
       case 'ArrowRight': case ' ': case 'PageDown': case 'Spacebar':
-        e.preventDefault(); next(); hideHint(); break;
+        e.preventDefault(); (e.shiftKey ? skipNext : next)(); hideHint(); break;
       case 'ArrowLeft': case 'PageUp':
-        e.preventDefault(); prev(); hideHint(); break;
+        e.preventDefault(); (e.shiftKey ? skipPrev : prev)(); hideHint(); break;
       case 'f': case 'F':
         e.preventDefault(); toggleFull(); break;
+      case 'm': case 'M':
+        e.preventDefault(); tocToggle(); hideHint(); break;
+      case 'Escape':
+        tocClose(); break;   // no preventDefault: Esc still exits full screen
       case 'Home': e.preventDefault(); go(0); break;
       case 'End': e.preventDefault(); go(total-1); break;
       default:
@@ -1076,9 +1288,22 @@ ul.bias .tag{
     if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ dx<0 ? next() : prev(); hideHint(); }
   }, {passive:true});
 
-  // Resume from hash if present (e.g. #6).
-  var start = parseInt((location.hash||'').replace('#',''),10);
-  if(!isNaN(start) && start>=1 && start<=total){ idx = start-1; }
+  // Resume from hash if present: named anchor (#usa) or numeric (#6, 1-based).
+  function indexFromHash(h){
+    h = (h || '').replace('#','');
+    if(!h) return -1;
+    if(typeof anchorIndex[h] === 'number') return anchorIndex[h];
+    var n = parseInt(h, 10);
+    if(!isNaN(n) && n>=1 && n<=total) return n-1;
+    return -1;
+  }
+  var start = indexFromHash(location.hash);
+  if(start >= 0){ idx = start; fragShown[idx] = fragsIn(idx).length; } // deep link lands fully built
+  // Manual hash edits / back-forward: follow the hash if it names another slide.
+  window.addEventListener('hashchange', function(){
+    var t = indexFromHash(location.hash);
+    if(t >= 0 && t !== idx){ go(t); }
+  });
   render();
 })();
 </script>
