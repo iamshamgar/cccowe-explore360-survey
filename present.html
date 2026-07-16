@@ -420,8 +420,11 @@ ul.bias .tag{
   pointer-events:none;
 }
 #progress{position:fixed; left:0; top:0; height:3px; background:var(--accent); width:0; z-index:20; transition:width .3s ease;}
+/* Hint pill sits ABOVE the footer band so it never overlaps the left descriptor
+   line (which otherwise reads as a mid-word truncation, e.g. "...THE EVOLVING ...").
+   Kept transient: it fades on first interaction. */
 #hint{
-  position:fixed; left:50%; bottom:calc(var(--u)*1.4); transform:translateX(-50%); z-index:20;
+  position:fixed; left:50%; bottom:calc(var(--u)*5.2); transform:translateX(-50%); z-index:20;
   font-family:var(--sans); font-size:calc(var(--u)*1.35); color:rgba(255,255,255,.7);
   background:rgba(13,17,20,.55); padding:.4em 1em; border-radius:1em;
   transition:opacity .5s ease; pointer-events:none;
@@ -492,7 +495,7 @@ ul.bias .tag{
           <div class="lead">
             <p class="l1">Share your church's context.</p>
             <p class="l2">Results appear live.</p>
-            <p class="fallback"><b>Can't scan?</b><br><a href="https://docs.google.com/forms/d/e/1FAIpQLSeO30R3q6S9R8Nxs0z1bX4fS4vHYBUoWzQFIrBOqaI2lgbeiA/viewform" target="_blank" rel="noopener">https://docs.google.com/forms/d/e/1FAIpQLSeO30R3q6S9R8Nxs0z1bX4fS4vHYBUoWzQFIrBOqaI2lgbeiA/viewform</a></p>
+            <p class="fallback"><b>Can't scan?</b><br><a href="https://forms.gle/gxPxhVhv5Y41jMhz8" target="_blank" rel="noopener">https://forms.gle/gxPxhVhv5Y41jMhz8</a></p>
           </div>
           <div class="qr">
             <img src="assets/survey-qr.png" alt="QR code to take the survey" />
