@@ -105,6 +105,33 @@ ul.bullets li{
   margin-bottom:calc(var(--u)*1.9);
 }
 ul.bullets li:last-child{margin-bottom:0;}
+ul.bullets li.hero{
+  font-family:var(--serif); color:var(--accent-dk);
+  font-size:calc(var(--u)*4.9); line-height:1.06;
+  margin-top:calc(var(--u)*.6);
+}
+ul.bullets li.hero::before{
+  top:.34em; width:calc(var(--u)*1.55); height:calc(var(--u)*1.55);
+}
+/* summary list — many short items, sized to stay readable at projection */
+ul.summary{list-style:none;}
+ul.summary li{
+  position:relative; padding-left:calc(var(--u)*3.0);
+  font-family:var(--sans); font-weight:700; color:var(--ink);
+  font-size:calc(var(--u)*3.1); line-height:1.08;
+  margin-bottom:calc(var(--u)*1.35);
+}
+ul.summary li:last-child{margin-bottom:0;}
+ul.summary li::before{
+  content:""; position:absolute; left:0; top:.42em;
+  width:calc(var(--u)*1.1); height:calc(var(--u)*1.1);
+  background:var(--accent); border-radius:50%;
+}
+.list-lead{
+  font-family:var(--sans); color:var(--ink-soft);
+  font-size:calc(var(--u)*2.3); line-height:1.2;
+  margin-bottom:calc(var(--u)*1.8); max-width:92%;
+}
 ul.bullets li::before{
   content:""; position:absolute; left:0; top:.42em;
   width:calc(var(--u)*1.25); height:calc(var(--u)*1.25);
@@ -214,6 +241,17 @@ ol.prompts li::before{
 .res-item a.reslink{font-family:var(--sans); font-size:calc(var(--u)*1.5); color:var(--accent); text-decoration:none; margin-top:calc(var(--u)*.5);}
 .res-item a.reslink:hover{text-decoration:underline;}
 
+/* footnote / discreet source line at bottom of a slide */
+.footnote{
+  font-family:var(--sans); color:var(--muted);
+  font-size:calc(var(--u)*1.55); line-height:1.25;
+  margin-top:calc(var(--u)*1.4); max-width:88%;
+}
+.source-line{
+  font-family:var(--sans); font-style:italic; color:var(--muted);
+  font-size:calc(var(--u)*1.4); margin-top:calc(var(--u)*1.4);
+}
+
 /* fragments — "reveal next point" build */
 .frag{opacity:0; transform:translateY(6px); transition:opacity .34s ease, transform .34s ease;}
 .frag.shown{opacity:1; transform:none;}
@@ -303,7 +341,7 @@ ol.prompts li::before{
       <div class="body top" style="justify-content:center;">
         <h1 class="title deck">The Evolving Chinese<br>Church Around the Globe</h1>
         <div class="rule-mark"></div>
-        <p class="subtitle-serif">Three windows on one global reality</p>
+        <p class="subtitle-serif">Three views of one global reality</p>
         <p class="by-name">Pastor Enoch Liao</p>
         <p class="by-meta">CCCOWE 2026 Explore360 · Kuching, Malaysia · July 21–22</p>
       </div>
@@ -333,7 +371,7 @@ ol.prompts li::before{
     <!-- ============ 3 · FRAMING ============ -->
     <section class="slide" data-tag="Framing">
       <span class="eyebrow">The Frame</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">Three pastors. Three windows.</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Three pastors. Three cities. Three stories.</h2></div>
       <div class="body">
         <div class="cols">
           <div class="card"><span class="captop"></span>
@@ -346,6 +384,7 @@ ol.prompts li::before{
             <p class="cname">ENOCH LIAO</p><p class="cplace">Boston, USA</p>
             <p class="cbig">Four waves,<br>one roof</p></div>
         </div>
+        <p class="footnote">Each has pastored 25+ years, the cases in my doctoral study of healthy pastoral longevity in the Chinese heritage church.</p>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Framing</span></div>
     </section>
@@ -353,13 +392,13 @@ ol.prompts li::before{
     <!-- ============ 4 · THROUGHLINES ============ -->
     <section class="slide" data-tag="Throughlines">
       <span class="eyebrow">What All Three Share</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">Four throughlines</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Four shared patterns</h2></div>
       <div class="body">
         <ul class="bullets">
-          <li class="frag">Waves rewrite the pews</li>
-          <li class="frag">The language question</li>
-          <li class="frag">Formation, not preservation</li>
-          <li class="frag">Heritage, not erasure</li>
+          <li class="frag">New arrivals keep changing the church</li>
+          <li class="frag">Which language to use?</li>
+          <li class="frag">Grow disciples, not just keep culture</li>
+          <li class="frag">Honor heritage, do not erase it</li>
         </ul>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Throughlines</span></div>
@@ -388,7 +427,7 @@ ol.prompts li::before{
     <!-- ============ 6 · UK POINTS ============ -->
     <section class="slide" data-tag="UK">
       <span class="eyebrow">UK · Bert Han · Birmingham</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">A flood — not a revival</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Sudden growth, not revival</h2></div>
       <div class="body">
         <ul class="bullets">
           <li class="frag">~200,000 Hong Kongers</li>
@@ -407,7 +446,7 @@ ol.prompts li::before{
         <div class="quote-wrap">
           <span class="qbar"></span>
           <div>
-            <p class="quote">“Hong Kong culture is dying — my daughter won't be one at all.”</p>
+            <p class="quote">“Hong Kong culture is dying, my daughter won't be one at all.”</p>
             <p class="attrib">— a BCEC newcomer</p>
           </div>
         </div>
@@ -418,13 +457,12 @@ ol.prompts li::before{
     <!-- ============ 8 · NORDIC POINTS ============ -->
     <section class="slide" data-tag="Nordic">
       <span class="eyebrow">Nordic · Billy Lo · Stockholm</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">Universal language, one church</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">One shared language. Four countries.</h2></div>
       <div class="body">
         <ul class="bullets">
-          <li class="frag">Language kept shifting</li>
-          <li class="frag">English, for inclusion</li>
-          <li class="frag">Universal, not cultural</li>
-          <li class="frag">One church, four nations</li>
+          <li class="frag">From Chinese to Nordic to English</li>
+          <li class="frag">Everyone speaks English</li>
+          <li class="frag">One church across four countries</li>
         </ul>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Nordic</span></div>
@@ -448,81 +486,51 @@ ol.prompts li::before{
     <!-- ============ 10 · USA POINTS ============ -->
     <section class="slide" data-tag="USA">
       <span class="eyebrow">USA · Enoch Liao · Boston</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">A century, and two exits</h2></div>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Was There a Silent Exodus?</h2></div>
       <div class="body">
         <ul class="bullets">
-          <li class="frag">Four waves, one roof</li>
-          <li class="frag">Complex, but fragile</li>
-          <li class="frag">Two exits: MEMA/MARK + multiethnic</li>
-          <li class="frag">Priced out, scattered</li>
+          <li class="frag">Two-thirds actually stayed</li>
+          <li class="frag">Most who left joined 'the nones,' like all of America</li>
+          <li class="frag hero">Those who stayed go to church MORE than white Protestants</li>
         </ul>
+        <p class="source-line">Chen &amp; Park, JSSR 2019; Park &amp; Tom, AAPI Voices 2014.</p>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
-    <!-- ============ 11 · USA QUOTE ============ -->
+    <!-- ============ 11 · USA QUOTE (Silent Exodus finding) ============ -->
     <section class="slide" data-tag="USA">
-      <span class="eyebrow">USA · Enoch Liao · Boston</span>
+      <span class="eyebrow">USA · The Silent Exodus, Reconsidered</span>
       <div class="body">
         <div class="quote-wrap">
           <span class="qbar"></span>
           <div>
-            <p class="quote">“My parents were born in China, and raised in Taiwan.”</p>
-            <p class="attrib">— Pastor Enoch Liao</p>
+            <p class="quote">“There does not appear to be a mass exodus.”</p>
+            <p class="attrib">— Jerry Z. Park &amp; Joshua Tom, sociologists (2014)</p>
           </div>
         </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">USA</span></div>
     </section>
 
-    <!-- ============ 12 · DIVERGENCE / CLOCKS ============ -->
-    <section class="slide" data-tag="Divergence">
-      <span class="eyebrow">Where They Diverge</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">Three different clocks</h2></div>
+    <!-- ============ 12 · CONCLUSION — Many variables, one sovereign God ============ -->
+    <section class="slide" data-tag="Conclusion">
+      <span class="eyebrow">The factors I'm studying</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Many variables. One sovereign God.</h2></div>
       <div class="body">
-        <div class="cols">
-          <div class="card leftbar"><span class="captop"></span>
-            <p class="ctag">UK</p><p class="cclock">First<br>generation</p><p class="cnote">BNO arrivals</p></div>
-          <div class="card leftbar"><span class="captop"></span>
-            <p class="ctag">NORDIC</p><p class="cclock">~ Two<br>generations</p><p class="cnote">Founders retired</p></div>
-          <div class="card leftbar"><span class="captop"></span>
-            <p class="ctag">USA</p><p class="cclock">4th–5th<br>generation</p><p class="cnote">No tie to China</p></div>
-        </div>
-      </div>
-      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Divergence</span></div>
-    </section>
-
-    <!-- ============ 13 · FORMATION POINTS ============ -->
-    <section class="slide" data-tag="Formation">
-      <span class="eyebrow">The Question Underneath</span>
-      <div class="titleblock"><span class="bar"></span><h2 class="title">What a healthy church forms</h2></div>
-      <div class="body">
-        <ul class="bullets">
-          <li class="frag">Whole disciples</li>
-          <li class="frag">Identity is discipleship</li>
-          <li class="frag">Whole, not hybrid</li>
-          <li class="frag">Sending is still healthy</li>
+        <p class="list-lead">God sovereignly uses many factors to shape each local Chinese heritage church, among them:</p>
+        <ul class="summary">
+          <li class="frag">Immigration patterns</li>
+          <li class="frag">Socioeconomic status</li>
+          <li class="frag">Size and numbers</li>
+          <li class="frag">Racialization</li>
+          <li class="frag">The strength of the wider evangelical church</li>
         </ul>
       </div>
-      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Formation</span></div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Conclusion</span></div>
     </section>
 
-    <!-- ============ 14 · FORMATION QUOTE ============ -->
-    <section class="slide" data-tag="Formation">
-      <span class="eyebrow">The Question Underneath</span>
-      <div class="body">
-        <div class="quote-wrap">
-          <span class="qbar"></span>
-          <div>
-            <p class="quote">“Bring it all — by grace — into your identity in Christ.”</p>
-            <p class="attrib">— Pastor Enoch Liao</p>
-          </div>
-        </div>
-      </div>
-      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Formation</span></div>
-    </section>
-
-    <!-- ============ 15 · CLOSING DISCUSSION ============ -->
+    <!-- ============ 13 · CLOSING DISCUSSION ============ -->
     <section class="slide wash" data-tag="Discuss">
       <span class="spine"></span>
       <div class="disc-head">
@@ -542,7 +550,7 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Discuss</span></div>
     </section>
 
-    <!-- ============ 16 · LIVE RESULTS (embedded dashboard) ============ -->
+    <!-- ============ 14 · LIVE RESULTS (embedded dashboard) ============ -->
     <section class="slide" data-tag="Live Results" data-embed="stage.html">
       <span class="eyebrow">See The Room</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">See the results — live</h2></div>
@@ -555,7 +563,7 @@ ol.prompts li::before{
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Live Results</span></div>
     </section>
 
-    <!-- ============ 17 · RESOURCES ============ -->
+    <!-- ============ 15 · RESOURCES ============ -->
     <section class="slide" data-tag="Resources">
       <span class="eyebrow">Take It With You</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Take it with you</h2></div>
@@ -586,7 +594,7 @@ ol.prompts li::before{
   <button class="nav-arrow" id="next" aria-label="Next slide">&#8250;</button>
 </div>
 
-<div id="counter">1 / 17</div>
+<div id="counter">1 / 15</div>
 <div id="hint">← → or Space to advance · F for full screen</div>
 
 <script>
