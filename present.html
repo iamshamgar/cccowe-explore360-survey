@@ -225,6 +225,9 @@ ol.prompts li::before{
   font-family:var(--sans); font-weight:700; color:var(--accent);
   font-size:calc(var(--u)*2.05);
 }
+/* Closing discussion has three long prompts; shrink type + tighten spacing so all fit. */
+ol.prompts.prompts-tight li{font-size:calc(var(--u)*1.62); line-height:1.2; margin-bottom:calc(var(--u)*1.15);}
+ol.prompts.prompts-tight li::before{font-size:calc(var(--u)*1.62);}
 
 /* QR + big statement layout (survey / live) */
 .split{display:flex; gap:calc(var(--u)*3.0); flex:1 1 auto; align-items:center; min-height:0;}
@@ -845,10 +848,10 @@ ul.bias .tag{
       <div class="body center">
         <div class="disc-card"><span class="cbar"></span>
           <p class="disc-intro">Take 16 minutes together. Be honest with each other:</p>
-          <ol class="prompts">
-            <li>Have you assumed most US Chinese heritage churches are only first and second generation?</li>
-            <li>Have you assumed everyone is losing their young people, that the “silent exodus” is the whole story?</li>
-            <li>Have you quietly lost hope in your English-speaking ministry because of these assumptions?</li>
+          <ol class="prompts prompts-tight">
+            <li>How much have you bought into the idea that most Chinese heritage churches (immigrant churches) are only first and second generation?</li>
+            <li>How much have you operated with the assumption that nearly all Chinese heritage churches are losing their young people?</li>
+            <li>How much has your hope in your local-language ministry suffered because of these assumptions, and how might a truer picture give you hope for its future?</li>
           </ol>
         </div>
       </div>
