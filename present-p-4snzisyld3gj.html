@@ -417,9 +417,9 @@ ul.bias .tag{
 .quiet-note{font-family:var(--sans); font-style:italic; color:var(--muted);
   font-size:calc(var(--u)*1.8); margin-top:calc(var(--u)*1.4);}
 
-/* photo timeline — STYLED PLACEHOLDER cards only (no real images, public site).
-   Two content-sized rows; each card = a fixed-height placeholder frame with the
-   year + event caption always visible below it. */
+/* CHCC timeline — YEAR cards. Each card = a wash plaque with the year set
+   large inside it (deck serif, petrol teal) and the event caption below.
+   Real gathering photos live on their own slides in the presenter build. */
 .timeline{
   display:grid; grid-template-columns:repeat(4,1fr);
   grid-auto-rows:1fr;
@@ -430,37 +430,28 @@ ul.bias .tag{
   display:flex; flex-direction:column; background:var(--paper);
   border:1px solid var(--rule); border-radius:3px; overflow:hidden; min-height:0;
 }
-/* short placeholder frame so the caption zone always has room for 2-3 lines */
+/* year plaque — quiet wash panel with the year centered, deck serif */
 .tl-frame{
-  position:relative; flex:0 0 auto; height:calc(var(--u)*2.7);
-  background:
-    repeating-linear-gradient(135deg,var(--wash),var(--wash) calc(var(--u)*1.4),#eef2f3 calc(var(--u)*1.4),#eef2f3 calc(var(--u)*2.8));
+  position:relative; flex:0 0 auto; height:calc(var(--u)*3.3);
+  background:var(--wash);
   border-bottom:1px solid var(--rule);
   display:flex; align-items:center; justify-content:center;
 }
-.tl-frame::after{
-  content:"PHOTO"; font-family:var(--sans); font-weight:700; letter-spacing:.2em;
-  font-size:calc(var(--u)*1.0); color:#9aa4a8;
-}
-/* caption zone — takes the remaining card height, so year + event (up to 3 lines) show */
+.tl-year{font-family:var(--serif); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*2.1); line-height:1;}
+/* caption zone — takes the remaining card height, so the event (up to 3 lines) shows */
 .tl-meta{flex:1 1 auto; min-height:0; padding:calc(var(--u)*.6) calc(var(--u)*.85) calc(var(--u)*.6);}
-.tl-year{font-family:var(--serif); font-weight:700; color:var(--accent-dk); font-size:calc(var(--u)*1.65); line-height:1;}
-.tl-event{font-family:var(--sans); color:var(--ink); font-size:calc(var(--u)*1.15); line-height:1.1; margin-top:calc(var(--u)*.28);}
+.tl-event{font-family:var(--sans); color:var(--ink); font-size:calc(var(--u)*1.15); line-height:1.1;}
 .tl-event small{display:block; margin-top:calc(var(--u)*.12); font-size:calc(var(--u)*.86); color:var(--muted); line-height:1.02;}
-/* upcoming "next" card — clearly forward-looking, not a past photo */
+/* upcoming "next" card — clearly forward-looking (dashed accent border + badge) */
 .tl-card.next{border:2px dashed var(--accent);}
-.tl-card.next .tl-frame{background:var(--wash);}
-.tl-card.next .tl-frame::after{content:"UPCOMING"; color:var(--accent);}
 .tl-card.next .tl-year{color:var(--accent);}
-/* NEXT badge pinned inside the frame's top-right corner, clear of the centered
-   UPCOMING label (badge is right-aligned, UPCOMING is centered). */
+/* NEXT badge pinned inside the frame's top-right corner, clear of the centered year */
 .tl-badge{
   position:absolute; top:calc(var(--u)*.45); right:calc(var(--u)*.45); z-index:3;
   font-family:var(--sans); font-weight:700; letter-spacing:.08em; text-transform:uppercase;
   font-size:calc(var(--u)*.85); color:#fff; background:var(--accent);
   padding:.22em .55em; border-radius:2em;
 }
-.tl-card.next .tl-frame::after{position:relative; left:calc(var(--u)*-1.2);}  /* nudge UPCOMING left of the badge */
 
 /* footnote / discreet source line at bottom of a slide */
 .footnote{
@@ -1052,19 +1043,19 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Conclusion</span></div>
     </section>
 
-    <!-- ============ 21 · I · PHOTO TIMELINE (STYLED PLACEHOLDERS ONLY — no real images) ============ -->
+    <!-- ============ 21 · I · CHCC TIMELINE (year cards — photos live on their own slides in the presenter build) ============ -->
     <section class="slide" id="chcc" data-tag="CHCC">
       <span class="eyebrow">USA · The people you assume do not exist</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Chinese Heritage Church Collaborative</h2></div>
       <div class="body center">
         <div class="timeline">
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2019</p><p class="tl-event">Pastors Colloquium</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2020</p><p class="tl-event">Online (Zoom)</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2023</p><p class="tl-event">First National Gathering</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2024</p><p class="tl-event">Two Regional Gatherings</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2025</p><p class="tl-event">National Gathering</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2026</p><p class="tl-event">Two Regional Gatherings</p></div></div>
-          <div class="tl-card next"><div class="tl-frame"><span class="tl-badge">Next</span></div><div class="tl-meta"><p class="tl-year">2027</p><p class="tl-event">National Gathering / Ministers Collective<br><small>Tentative: Chicagoland, IL · May 2027</small></p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2019</p></div><div class="tl-meta"><p class="tl-event">Pastors Colloquium</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2020</p></div><div class="tl-meta"><p class="tl-event">Online (Zoom)</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2023</p></div><div class="tl-meta"><p class="tl-event">First National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2024</p></div><div class="tl-meta"><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2025</p></div><div class="tl-meta"><p class="tl-event">National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2026</p></div><div class="tl-meta"><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card next"><div class="tl-frame"><span class="tl-badge">Next</span><p class="tl-year">2027</p></div><div class="tl-meta"><p class="tl-event">National Gathering / Ministers Collective<br><small>Tentative: Chicagoland, IL · May 2027</small></p></div></div>
         </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">CHCC</span></div>
@@ -1097,13 +1088,13 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
       <div class="titleblock"><span class="bar"></span><h2 class="title">Chinese Heritage Church Collaborative</h2></div>
       <div class="body center">
         <div class="timeline">
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2019</p><p class="tl-event">Pastors Colloquium</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2020</p><p class="tl-event">Online (Zoom)</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2023</p><p class="tl-event">First National Gathering</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2024</p><p class="tl-event">Two Regional Gatherings</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2025</p><p class="tl-event">National Gathering</p></div></div>
-          <div class="tl-card"><div class="tl-frame"></div><div class="tl-meta"><p class="tl-year">2026</p><p class="tl-event">Two Regional Gatherings</p></div></div>
-          <div class="tl-card next"><div class="tl-frame"><span class="tl-badge">Next</span></div><div class="tl-meta"><p class="tl-year">2027</p><p class="tl-event">National Gathering / Ministers Collective<br><small>Tentative: Chicagoland, IL · May 2027</small></p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2019</p></div><div class="tl-meta"><p class="tl-event">Pastors Colloquium</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2020</p></div><div class="tl-meta"><p class="tl-event">Online (Zoom)</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2023</p></div><div class="tl-meta"><p class="tl-event">First National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2024</p></div><div class="tl-meta"><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2025</p></div><div class="tl-meta"><p class="tl-event">National Gathering</p></div></div>
+          <div class="tl-card"><div class="tl-frame"><p class="tl-year">2026</p></div><div class="tl-meta"><p class="tl-event">Two Regional Gatherings</p></div></div>
+          <div class="tl-card next"><div class="tl-frame"><span class="tl-badge">Next</span><p class="tl-year">2027</p></div><div class="tl-meta"><p class="tl-event">National Gathering / Ministers Collective<br><small>Tentative: Chicagoland, IL · May 2027</small></p></div></div>
         </div>
       </div>
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">CHCC</span></div>
