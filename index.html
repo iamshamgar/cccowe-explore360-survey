@@ -3,149 +3,46 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CCCOWE 2026 Explore360 — Survey</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/styles.css" />
+<meta name="robots" content="noindex" />
+<meta http-equiv="refresh" content="0; url=https://forms.gle/gxPxhVhv5Y41jMhz8" />
+<title>Explore360 Survey — Redirecting</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1F5F73;
+    font-family: Lato, "Helvetica Neue", Arial, sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+  .card { padding: 24px; max-width: 34em; }
+  h1 {
+    font-family: "PT Serif", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0 0 12px;
+  }
+  p { margin: 0 0 20px; opacity: .85; line-height: 1.5; }
+  a.go {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 6px;
+    background: #fff;
+    color: #1F5F73;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
 </head>
 <body>
-
-<header class="banner">
-  <p class="banner__eyebrow">CCCOWE 2026 &middot; Explore360 Breakout</p>
-  <h1 class="banner__title">The Evolving Chinese Church <span class="accent">Around the Globe</span></h1>
-  <p class="banner__meta">Kuching, Malaysia &middot; July 21&ndash;22, 2026 &nbsp;&bull;&nbsp; <a href="dashboard-live.html">View live dashboard &rarr;</a></p>
-</header>
-
-<main class="wrap">
-
-  <!-- FORM -->
-  <form id="survey" novalidate>
-    <div class="intro">
-      <strong>Make the room visible to itself.</strong> This quick survey (under 3 minutes) surfaces the shared
-      shape of Chinese heritage ministry across our countries, migration waves, languages, and generations.
-      Your responses appear live on the dashboard. <span class="demo-flag">Prototype</span>
-    </div>
-
-    <!-- SECTION 1 -->
-    <div class="section-tag">
-      <span class="section-tag__num">Section 1</span>
-      <span class="section-tag__name">About Your Church</span>
-    </div>
-    <p class="section-tag__hint">Who are the people? — migration waves, languages, generations, structure.</p>
-
-    <!-- Q1 -->
-    <div class="q">
-      <label class="q__label" for="q1"><span class="q__num">1.</span> What country is your church in?</label>
-      <div class="q__body">
-        <input class="txt" type="text" id="q1" name="q1_country" placeholder="Your country" autocomplete="off" />
-      </div>
-    </div>
-
-    <!-- Q2 -->
-    <div class="q">
-      <label class="q__label" for="q2"><span class="q__num">2.</span> Church name and city</label>
-      <div class="q__body">
-        <input class="txt" type="text" id="q2" name="q2_church" placeholder="e.g., Boston Chinese Evangelical Church — Boston" autocomplete="off" />
-      </div>
-    </div>
-
-    <!-- Q3 -->
-    <div class="q" data-single="q3_role">
-      <p class="q__label"><span class="q__num">3.</span> What is your role in your church?</p>
-      <div class="q__body" id="q3-opts"></div>
-    </div>
-
-    <!-- Q4 -->
-    <div class="q" data-single="q4_languages">
-      <p class="q__label"><span class="q__num">4.</span> How many languages are used across your church&rsquo;s regular services and ministries?</p>
-      <div class="q__body" id="q4-opts"></div>
-    </div>
-
-    <!-- Q5 -->
-    <div class="q" data-multi="q5_communities">
-      <p class="q__label"><span class="q__num">5.</span> Which communities are part of your congregation?</p>
-      <p class="q__help">Select all that apply.</p>
-      <div class="q__body" id="q5-opts"></div>
-    </div>
-
-    <!-- Q6 -->
-    <div class="q" data-single="q6_relative_size">
-      <p class="q__label"><span class="q__num">6.</span> How large is your local-language/English-speaking congregation relative to your Chinese-speaking congregation(s)?</p>
-      <div class="q__body" id="q6-opts"></div>
-    </div>
-
-    <!-- SECTION 2 -->
-    <div class="section-tag">
-      <span class="section-tag__num">Section 2</span>
-      <span class="section-tag__name">What&rsquo;s Pressing</span>
-    </div>
-    <p class="section-tag__hint">What are the hardest tensions?</p>
-
-    <!-- Q7 -->
-    <div class="q" data-single="q7_youth">
-      <p class="q__label"><span class="q__num">7.</span> When the young people who grow up in your church reach adulthood, what do you most often see?</p>
-      <div class="q__body" id="q7-opts"></div>
-    </div>
-
-    <!-- Q8 -->
-    <div class="q" data-multi="q8_tensions" data-max="3">
-      <p class="q__label"><span class="q__num">8.</span> What is the most pressing tension your church is navigating right now?</p>
-      <p class="q__help">Select up to 3.</p>
-      <div class="q__body" id="q8-opts"></div>
-      <p class="cap-note" id="q8-cap">0 of 3 selected</p>
-    </div>
-
-    <!-- SECTION 3 -->
-    <div class="section-tag">
-      <span class="section-tag__num">Section 3</span>
-      <span class="section-tag__name">Hope &amp; Future</span>
-    </div>
-    <p class="section-tag__hint">What is the hope for the future of a healthy Chinese heritage church?</p>
-
-    <!-- Q9 -->
-    <div class="q" data-scale="q9_hope">
-      <p class="q__label"><span class="q__num">9.</span> How hopeful are you about the future of the Chinese heritage church in your context?</p>
-      <div class="q__body">
-        <div class="scale" id="q9-scale"></div>
-        <div class="scale__ends">
-          <span>1 — Not hopeful at all</span>
-          <span>5 — Extremely hopeful</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Q10 -->
-    <div class="q" data-multi="q10_hope_sources">
-      <p class="q__label"><span class="q__num">10.</span> What gives you the most hope for the Chinese heritage church right now?</p>
-      <p class="q__help">Select all that apply.</p>
-      <div class="q__body" id="q10-opts"></div>
-    </div>
-
-    <div class="actions">
-      <button type="submit" class="btn btn--primary">Submit response</button>
-      <p class="form-error" id="form-error"></p>
-    </div>
-  </form>
-
-  <!-- THANK YOU -->
-  <div class="thanks hidden" id="thanks">
-    <div class="thanks__check">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-    </div>
-    <h2>Thank you</h2>
-    <p>Your response is now part of the room. Watch it appear on the live dashboard alongside delegates from around the globe.</p>
-    <a href="dashboard-live.html" class="btn btn--primary">Open the live dashboard &rarr;</a>
-    <div style="margin-top:16px;">
-      <button class="btn btn--ghost" id="again" type="button">Submit another response</button>
-    </div>
+  <div class="card">
+    <h1>Taking you to the Explore360 survey&hellip;</h1>
+    <p>CCCOWE 2026 &middot; The Evolving Chinese Church Around the Globe</p>
+    <a class="go" href="https://forms.gle/gxPxhVhv5Y41jMhz8">Open the survey</a>
   </div>
-
-  <p class="pagelink"><a href="dashboard-live.html">Skip to the live dashboard &rarr;</a> &nbsp;&middot;&nbsp; <a href="present.html">Presentation &rarr;</a> &nbsp;&middot;&nbsp; <a href="stage.html">Projector view &rarr;</a> &nbsp;&middot;&nbsp; <a href="resources.html">Resources &rarr;</a></p>
-
-</main>
-
-<script src="js/questions.js"></script>
-<script src="js/survey.js"></script>
+  <script>location.replace("https://forms.gle/gxPxhVhv5Y41jMhz8");</script>
 </body>
 </html>
