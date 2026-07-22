@@ -510,6 +510,17 @@ table.cmp tbody tr:last-child th, table.cmp tbody tr:last-child td{border-bottom
 .slide.title-slide .foot .copy{white-space:nowrap;}
 .subtitle-serif{font-family:var(--serif); font-style:italic; color:var(--ink-soft); font-size:calc(var(--u)*2.6); line-height:1.2;}
 .rule-mark{width:calc(var(--u)*18); height:3px; background:var(--accent); margin:calc(var(--u)*1.8) 0;}
+/* section-divider portrait — circular, petrol-teal ring, centered above the name.
+   Sized in --u so it scales with the deck; the vh cap keeps it projector-safe and
+   never lets it push the name/church/meta or the footer band off the slide. */
+.divider .portrait{
+  --pin: min(calc(var(--u)*13), 30vh);
+  width:var(--pin); height:var(--pin);
+  border-radius:50%; object-fit:cover; object-position:center top;
+  display:block; margin:0 auto calc(var(--u)*1.6);
+  border:calc(var(--u)*.4) solid var(--paper);
+  box-shadow:0 0 0 calc(var(--u)*.34) var(--accent), 0 6px 24px rgba(28,30,33,.18);
+}
 .by-name{font-family:var(--sans); font-weight:700; color:var(--ink); font-size:calc(var(--u)*2.4); margin-top:calc(var(--u)*.6);}
 .by-meta{font-family:var(--sans); color:var(--muted); font-size:calc(var(--u)*1.7); letter-spacing:.02em; margin-top:calc(var(--u)*.35);}
 
@@ -753,6 +764,7 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
       <span class="spine"></span>
       <span class="eyebrow">United Kingdom · Birmingham</span>
       <div class="body center">
+        <img class="portrait" src="assets/bert-han.jpg" alt="Portrait of Pastor Bert Han" />
         <h2 class="div-name">Pastor Bert Han</h2>
         <div class="rule-mark"></div>
         <p class="div-church">Birmingham Chinese Evangelical Church</p>
@@ -796,6 +808,7 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
       <span class="spine"></span>
       <span class="eyebrow">Nordic Region · Stockholm</span>
       <div class="body center">
+        <img class="portrait" src="assets/billy-lo.jpg" alt="Portrait of Pastor Billy Lo" />
         <h2 class="div-name">Pastor Billy Lo</h2>
         <div class="rule-mark"></div>
         <p class="div-church">Stockholm Chinese Christian Church</p>
