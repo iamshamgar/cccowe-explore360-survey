@@ -394,6 +394,58 @@ ul.bias .tag{
   font-size:calc(var(--u)*1.4); margin-top:calc(var(--u)*1.4);
 }
 
+/* ---- Chinese (CJK) rendering: self-contained system-font fallback, no CDN ----
+   Latin display faces carry no CJK glyphs, so per-glyph fallback lands on the
+   installed system CJK face (PingFang on macOS, JhengHei on Windows, Noto on
+   Linux). Traditional characters render cleanly and large, fully offline. */
+.cjk{
+  font-family:"Lato","Avenir Next","PingFang TC","Hiragino Sans","Microsoft JhengHei","Noto Sans CJK TC",sans-serif;
+}
+.title.cjk-title{
+  font-family:"PT Serif","Iowan Old Style","PingFang TC","Hiragino Sans","Microsoft JhengHei","Noto Sans CJK TC","Georgia",serif;
+  font-size:calc(var(--u)*4.4); letter-spacing:.05em;
+}
+/* payoff line — serif accent statement, hero treatment without a bullet dot */
+.payoff{
+  font-family:var(--serif); font-weight:700; color:var(--accent-dk);
+  font-size:calc(var(--u)*2.5); line-height:1.1; margin-top:calc(var(--u)*1.3);
+}
+/* comparison table — petrol-teal header band, rule lines, wash-highlighted
+   focus column; sized to sit inside the 16:9 safe area and read on a projector. */
+table.cmp{
+  width:100%; border-collapse:collapse; margin-top:calc(var(--u)*1.2);
+  font-family:var(--sans); table-layout:fixed;
+}
+table.cmp col.rowlab{width:26%;}
+table.cmp col.enoch{background:var(--wash);}
+table.cmp th, table.cmp td{
+  text-align:left; vertical-align:middle;
+  padding:calc(var(--u)*.85) calc(var(--u)*1.3);
+  border-bottom:1px solid var(--rule);
+}
+table.cmp thead th{
+  color:#fff; background:var(--accent-dk); font-weight:700;
+  font-size:calc(var(--u)*1.6); letter-spacing:.01em; line-height:1.1;
+}
+table.cmp thead th:first-child{background:var(--accent);}
+table.cmp thead th .hcap{
+  display:block; font-weight:400; letter-spacing:.02em;
+  font-size:calc(var(--u)*1.1); color:rgba(255,255,255,.82); margin-top:calc(var(--u)*.2);
+}
+table.cmp tbody th{
+  font-weight:700; color:var(--accent-dk); background:var(--wash);
+  font-size:calc(var(--u)*1.4); white-space:nowrap;
+}
+table.cmp tbody td{
+  color:var(--ink); font-weight:700; font-size:calc(var(--u)*1.7); line-height:1.12;
+}
+table.cmp tbody td.em{color:var(--accent-dk);}
+table.cmp tbody td .gloss{
+  display:block; font-weight:400; color:var(--muted);
+  font-size:calc(var(--u)*1.15); line-height:1.15; margin-top:calc(var(--u)*.25);
+}
+table.cmp tbody tr:last-child th, table.cmp tbody tr:last-child td{border-bottom:none;}
+
 /* fragments — "reveal next point" build */
 .frag{opacity:0; transform:translateY(6px); transition:opacity .34s ease, transform .34s ease;}
 .frag.shown{opacity:1; transform:none;}
@@ -972,6 +1024,105 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
       <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Conclusion</span></div>
     </section>
 
+    <!-- ============ 20a · TRANSLATION · THE QUESTION ============ -->
+    <section class="slide" id="translation" data-tag="Translation">
+      <span class="eyebrow">The Question</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">How do you say it in Chinese?</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag hero">“Chinese heritage church” — in Chinese?</li>
+          <li class="frag">Not an obvious translation</li>
+          <li class="frag">A deliberate choice</li>
+          <li class="frag">One character decides everything</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Translation</span></div>
+    </section>
+
+    <!-- ============ 20b · TRANSLATION · THE TEAM ============ -->
+    <section class="slide" data-tag="Translation">
+      <span class="eyebrow">The Team</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">Built by Chinese pastors and scholars</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag">Pastor Andy Su</li>
+          <li class="frag">Dr. James Liao</li>
+          <li class="frag">Belle Liao</li>
+          <li class="frag">Dr. Enoch Wan</li>
+        </ul>
+        <p class="source-line">Developed collaboratively as a team.</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Translation</span></div>
+    </section>
+
+    <!-- ============ 20c · TRANSLATION · THE USUAL TERM ============ -->
+    <section class="slide" data-tag="Translation">
+      <span class="eyebrow">The Usual Term</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title cjk-title">華人教會</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag hero">“Chinese ethnic church”</li>
+          <li class="frag cjk">人 (rén) = people, ethnicity</li>
+          <li class="frag">Ethnicity as the label</li>
+          <li class="frag">Identity framed as a category</li>
+          <li class="frag">Carries inherited baggage</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Translation</span></div>
+    </section>
+
+    <!-- ============ 20d · TRANSLATION · ENOCH'S PHRASE ============ -->
+    <section class="slide" data-tag="Translation">
+      <span class="eyebrow">Enoch's Phrase</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title cjk-title">華源教會</h2></div>
+      <div class="body">
+        <ul class="bullets">
+          <li class="frag cjk">源 (yuán) = source, origin, wellspring</li>
+          <li class="frag">Heritage as lineage, not label</li>
+          <li class="frag">Inheritance that is stewarded</li>
+        </ul>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Translation</span></div>
+    </section>
+
+    <!-- ============ 20e · TRANSLATION · THE COMPARISON ============ -->
+    <section class="slide" data-tag="Translation">
+      <span class="eyebrow">The Comparison</span>
+      <div class="titleblock"><span class="bar"></span><h2 class="title">One character: <span class="cjk">源</span> or <span class="cjk">人</span></h2></div>
+      <div class="body">
+        <table class="cmp">
+          <colgroup><col class="rowlab" /><col class="enoch" /><col class="usual" /></colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="cjk">華源教會<span class="hcap">Enoch's term</span></th>
+              <th class="cjk">華人教會<span class="hcap">usual term</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Characters</th>
+              <td class="cjk em">華源教會</td>
+              <td class="cjk">華人教會</td>
+            </tr>
+            <tr>
+              <th>Middle character</th>
+              <td class="cjk em">源<span class="gloss">yuán — source / origin / heritage</span></td>
+              <td class="cjk">人<span class="gloss">rén — people / ethnicity</span></td>
+            </tr>
+            <tr>
+              <th>Meaning</th>
+              <td class="em">“Chinese heritage church”</td>
+              <td>“Chinese ethnic church”</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="payoff">An accurate translation. Free of the old baggage.</p>
+        <p class="footnote cjk">華源教會 · Huá Yuán Jiào Huì</p>
+      </div>
+      <div class="foot"><span class="tie">CCCOWE 2026 Explore360 · The Evolving Chinese Church Around the Globe</span><span class="copy">© 2026 Enoch Y. Liao</span><span class="tag">Translation</span></div>
+    </section>
+
     <!-- ============ 21 · I · CHCC TIMELINE (year cards — photos live on their own slides in the presenter build) ============ -->
     <section class="slide" id="chcc" data-tag="CHCC">
       <span class="eyebrow">USA · The people you assume do not exist</span>
@@ -1074,6 +1225,7 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
     <li><a href="#usa">Pastor Enoch Liao<span class="toc-sub">Boston · USA</span></a></li>
     <li><a class="toc-child" href="#silent-exodus">Silent Exodus<span class="toc-sub">Was there one? · USA</span></a></li>
     <li><a href="#conclusion">Many Variables<span class="toc-sub">One sovereign God</span></a></li>
+    <li><a href="#translation">The Chinese Translation<span class="toc-sub cjk">華源教會 · naming</span></a></li>
     <li><a href="#chcc">CHCC<span class="toc-sub">Chinese Heritage Church Collaborative</span></a></li>
     <li><a href="#closing">Closing Discussion<span class="toc-sub">A look in the mirror</span></a></li>
     <li><a href="#live">Live Results<span class="toc-sub">See the room's survey answers</span></a></li>
