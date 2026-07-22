@@ -633,6 +633,11 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
   display:block; font-weight:400; color:var(--muted);
   font-size:calc(var(--u)*1.15); margin-top:calc(var(--u)*.15);
 }
+/* sub-item: indented, lighter, subordinate to its parent section entry */
+#toc a.toc-child{
+  padding-left:calc(var(--u)*3.6); font-weight:400; color:var(--muted);
+  font-size:calc(var(--u)*1.32);
+}
 #toc a:hover{background:var(--wash);}
 #toc a:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
 /* current section: wash band + accent spine, mirroring the deck's spine motif */
@@ -895,7 +900,7 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
     </section>
 
     <!-- ============ 12 · C · SILENT EXODUS MYTH ============ -->
-    <section class="slide" data-tag="USA">
+    <section class="slide" data-tag="USA" id="silent-exodus">
       <span class="eyebrow">USA · Enoch Liao · Boston</span>
       <div class="titleblock"><span class="bar"></span><h2 class="title">Was There a Silent Exodus?</h2></div>
       <div class="body">
@@ -1182,6 +1187,7 @@ body.toc-open #toc-scrim{opacity:1; visibility:visible; transition:opacity .28s 
     <li><a href="#uk">Pastor Bert Han<span class="toc-sub">Birmingham · United Kingdom</span></a></li>
     <li><a href="#nordic">Pastor Billy Lo<span class="toc-sub">Stockholm · Nordic region</span></a></li>
     <li><a href="#usa">Pastor Enoch Liao<span class="toc-sub">Boston · USA</span></a></li>
+    <li><a class="toc-child" href="#silent-exodus">Silent Exodus<span class="toc-sub">Was there one? · USA</span></a></li>
     <li><a href="#conclusion">Many Variables<span class="toc-sub">One sovereign God</span></a></li>
     <li><a href="#chcc">CHCC<span class="toc-sub">Chinese Heritage Church Collaborative</span></a></li>
     <li><a href="#photos">Gathering Photos<span class="toc-sub">CHCC 2019–2026 in pictures</span></a></li>
